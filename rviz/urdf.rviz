@@ -11,6 +11,7 @@ Panels:
         - /RobotModel1
         - /RobotModel1/Links1
         - /RobotModel1/Links1/base_plate1/Orientation1
+        - /TF1
         - /TF1/Frames1
         - /TF1/Tree1
       Splitter Ratio: 0.376923084
@@ -38,7 +39,7 @@ Visualization Manager:
   Class: ""
   Displays:
     - Alpha: 0.5
-      Cell Size: 0.0500000007
+      Cell Size: 0.200000003
       Class: rviz/Grid
       Color: 160; 160; 164
       Enabled: true
@@ -52,7 +53,7 @@ Visualization Manager:
         Y: 0
         Z: 0
       Plane: XY
-      Plane Cell Count: 10
+      Plane Cell Count: 20
       Reference Frame: base_plate
       Value: true
     - Alpha: 0.5
@@ -65,17 +66,42 @@ Visualization Manager:
         Expand Link Details: false
         Expand Tree: false
         Link Tree Style: Links in Alphabetic Order
+        actuator1:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        actuator2:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
         actuator3:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        arm2:
+        base_plate:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        base_plate:
+        connectingbox:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        tip:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        tube1:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        tube2:
           Alpha: 1
           Show Axes: false
           Show Trail: false
@@ -91,13 +117,23 @@ Visualization Manager:
       Frame Timeout: 15
       Frames:
         All Enabled: true
-        actuator3:
+        actuator1:
           Value: true
-        arm2:
+        actuator2:
+          Value: true
+        actuator3:
           Value: true
         base_plate:
           Value: true
-      Marker Scale: 0.5
+        connectingbox:
+          Value: true
+        tip:
+          Value: true
+        tube1:
+          Value: true
+        tube2:
+          Value: true
+      Marker Scale: 0.100000001
       Name: TF
       Show Arrows: true
       Show Axes: true
@@ -105,8 +141,13 @@ Visualization Manager:
       Tree:
         base_plate:
           actuator3:
-            arm2:
-              {}
+            connectingbox:
+              actuator2:
+                tube2:
+                  actuator1:
+                    tube1:
+                      tip:
+                        {}
       Update Interval: 0
       Value: true
   Enabled: true
@@ -133,7 +174,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 0.518739939
+      Distance: 1.59793484
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.0599999987
         Stereo Focal Distance: 1
@@ -148,10 +189,10 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.00999999978
-      Pitch: 0.545398057
+      Pitch: 0.504797041
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 0.155398622
+      Yaw: 5.19670963
     Saved:
       - Class: rviz/Orbit
         Distance: 0.518739939
