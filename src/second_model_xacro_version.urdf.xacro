@@ -1,0 +1,264 @@
+<?xml version="1.0"?>
+<robot name="arm" xmlns:xacro="http://ros.org/wiki/xacro">
+
+
+  <material name="black">
+    <color rgba="0 0 0 1"/>
+  </material>
+  <material name="light_grey">
+    <color rgba="0 0 0 0.2"/>
+  </material>
+  <material name="grey">
+    <color rgba="0 0 0 0.5"/>
+  </material>
+  <material name="dark_grey">
+    <color rgba="0 0 0 0.7"/>
+  </material>
+  <material name="white">
+    <color rgba="1 1 1 1"/>
+  </material>
+
+  <xacro:property name="pi" value="3.1415269" />
+
+  <xacro:property name="Baseplate_box_length" value="0.1" />
+  <xacro:property name="Baseplate_box_width" value="0.1" />
+  <xacro:property name="Baseplate_box_depth" value="0.001" />
+
+  <xacro:property name="Baseplate_mass" value="0.040063354" />
+
+  <xacro:property name="Baseplate_cog_x" value="0.025202079" />
+  <xacro:property name="Baseplate_cog_y" value="0.014500000" />
+  <xacro:property name="Baseplate_cog_z" value="0.000000000" />
+  <xacro:property name="Baseplate_ixx" value="0.000035649" />
+  <xacro:property name="Baseplate_ixy" value="0.000014640" />
+  <xacro:property name="Baseplate_ixz" value="0.000000000" />
+  <xacro:property name="Baseplate_iyy" value="0.000091991" />
+  <xacro:property name="Baseplate_iyz" value="0.000000000" />
+  <xacro:property name="Baseplate_izz" value="0.000073356" />
+
+
+  <link name="base_plate">
+    <visual>
+      <geometry>
+        <box size="${Baseplate_box_length} ${Baseplate_box_width} ${Baseplate_box_depth}"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <!--<origin rpy="0 0 0" xyz="${Baseplate_cog_x} ${Baseplate_cog_y} ${Baseplate_cog_z}"/>-->
+      <material name="dark_grey"/>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="${Baseplate_box_length} ${Baseplate_box_width} ${Baseplate_box_depth}"/>
+      </geometry>
+    </collision>
+    <inertia>
+      <mass value="${Baseplate_mass}"/>
+      <inertia ixx="${Baseplate_ixx}" ixy="${Baseplate_ixy}" ixz="${Baseplate_ixz}" iyy="${Baseplate_iyy}" iyz="${Baseplate_iyz}" izz="${Baseplate_izz}" />
+    </inertia>
+  </link>
+
+  <joint name="baseplate_to_actuator3" type="fixed">
+    <parent link="base_plate"/>
+    <child link="actuator3"/>
+    <origin rpy="0 0 0" xyz="0 0 ${Baseplate_box_depth}"/>
+  </joint>
+
+  <xacro:property name="actuator3_box_x" value="0.04" />
+  <xacro:property name="actuator3_box_y" value="0.061" />
+  <xacro:property name="actuator3_box_z" value="0.041" />
+
+  <xacro:property name="Baseplate_mass" value="0.22" />
+
+  <xacro:property name="Baseplate_cog_x" value="0.429478272026" />
+  <xacro:property name="Baseplate_cog_y" value="0.001212846812" />
+  <xacro:property name="Baseplate_cog_z" value="0.268013482827" />
+  <xacro:property name="Baseplate_ixx" value="0.000035649" />
+  <xacro:property name="Baseplate_ixy" value="0.000014640" />
+  <xacro:property name="Baseplate_ixz" value="0.000000000" />
+  <xacro:property name="Baseplate_iyy" value="0.000091991" />
+  <xacro:property name="Baseplate_iyz" value="0.000000000" />
+  <xacro:property name="Baseplate_izz" value="0.000073356" />
+
+  <link name="actuator3">
+    <visual>
+      <geometry>
+        <box size="${actuator3_box_x} ${actuator3_box_y} ${actuator3_box_z}"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 ${actuator3_box_z/2}"/>
+      <origin rpy="0 0 0" xyz="0 0 ${actuator3_box_z/2}"/>
+      <material name="black"/>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="${actuator3_box_x} ${actuator3_box_y} ${actuator3_box_z}"/>
+      </geometry>
+    </collision>
+    <inertia>
+      <mass value="${Baseplate_mass}"/>
+      <inertia ixx="0.00003691125" ixy="0" ixz="0" iyy="0.00005986125" iyz="0" izz="0.0000607725" />
+    </inertia>
+  </link>
+
+
+  <joint name="actuator3_to_connectingplate" type="continuous">
+    <axis rpy="0 0 0" xyz="0 0 1"/>
+    <parent link="actuator3"/>
+    <child link="connectingbox"/>
+    <origin xyz="0 0.01755 0.041"/>
+  </joint>
+
+
+  <link name="connectingbox">
+    <visual>
+      <geometry>
+        <box size="0.043 0.06 0.0995"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0.04975"/>
+      <material name="white"/>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.043 0.06 0.0995"/>
+      </geometry>
+    </collision>
+    <inertia>
+      <mass value="0.01"/>
+      <inertia ixx="0.0012" ixy="0" ixz="0" iyy="0" iyz="0" izz="0.0012" />
+    </inertia>
+  </link>
+
+
+  <joint name="connectingbox_to_actuator2" type="fixed">
+    <parent link="connectingbox"/>
+    <child link="actuator2"/>
+    <origin xyz="-0.0215 0 0.06"/>
+  </joint>
+
+  <link name="actuator2">
+    <visual>
+      <geometry>
+        <box size="0.031 0.11 0.073"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="-0.0155 -0.025 0"/>
+      <material name="white"/>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.031 0.11 0.073"/>
+      </geometry>
+    </collision>
+    <inertia>
+      <mass value="0.01"/>
+      <inertia ixx="0.0012" ixy="0" ixz="0" iyy="0" iyz="0" izz="0.0012" />
+    </inertia>
+  </link>
+
+  <joint name="actuator2_to_tube2" type="continuous">
+    <axis rpy="0 0 0" xyz="1 0 0"/>
+    <parent link="actuator2"/>
+    <child link="tube2"/>
+    <origin xyz="-0.031 0 0"/>
+  </joint>
+
+
+  <link name="tube2">
+    <visual>
+      <geometry>
+        <cylinder length="0.6" radius="0.01"/>
+      </geometry>
+      <origin rpy="1.570796 0 0" xyz="-0.01 0.3 0"/>
+      <material name="light_grey"/>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.6" radius="0.01"/>
+      </geometry>
+    </collision>
+    <inertia>
+      <mass value="0.01"/>
+      <inertia ixx="0.0012" ixy="0" ixz="0" iyy="0" iyz="0" izz="0.0012" />
+    </inertia>
+  </link>
+
+    <joint name="tube2_to_actuator1" type="fixed">
+      <parent link="tube2"/>
+      <child link="actuator1"/>
+      <origin rpy="0 1.5707963 0" xyz="0 0.6 0"/>
+    </joint>
+
+
+  <link name="actuator1">
+    <visual>
+      <geometry>
+        <box size="0.04 0.061 0.041"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 -0.0305 0.0205"/>
+      <material name="black"/>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.04 0.061 0.041"/>
+      </geometry>
+    </collision>
+    <inertia>
+      <mass value="0.22"/>
+      <inertia ixx="0.00003691125" ixy="0" ixz="0" iyy="0.00005986125" iyz="0" izz="0.0000607725" />
+    </inertia>
+  </link>
+
+
+  <joint name="actuator1_to_tube1" type="continuous">
+    <axis rpy="0 0 0" xyz="0 0 1"/>
+    <parent link="actuator1"/>
+    <child link="tube1"/>
+    <origin xyz="0 -0.013 0.041"/>
+  </joint>
+
+
+    <link name="tube1">
+      <visual>
+        <geometry>
+          <cylinder length="0.4" radius="0.007"/>
+        </geometry>
+        <origin rpy="1.570796 0 0" xyz="0 0.2 0.007"/>
+        <material name="light_grey"/>
+      </visual>
+      <collision>
+        <geometry>
+          <cylinder length="0.4" radius="0.007"/>
+        </geometry>
+      </collision>
+      <inertia>
+        <mass value="0.01"/>
+        <inertia ixx="0.0012" ixy="0" ixz="0" iyy="0" iyz="0" izz="0.0012" />
+      </inertia>
+    </link>
+
+    <joint name="tube1_to_tip" type="fixed">
+      <parent link="tube1"/>
+      <child link="tip"/>
+      <origin xyz="0 0.4 0.007"/>
+    </joint>
+
+    <link name="tip">
+      <visual>
+        <geometry>
+          <!--
+          <mesh filename="package://mav_arm_force_controlled/meshes/tip.stl"/>
+        -->
+          <sphere radius="0.007"/>
+        </geometry>
+        <origin rpy="0 0 0" xyz="0 0 0"/>
+        <material name="white"/>
+      </visual>
+      <collision>
+        <geometry>
+          <sphere radius="0.014"/>
+        </geometry>
+      </collision>
+      <inertia>
+        <mass value="0.01"/>
+        <inertia ixx="0.00028" ixy="0" ixz="0" iyy="0.00028" iyz="0" izz="0.00028" />
+      </inertia>
+    </link>
+</robot>
