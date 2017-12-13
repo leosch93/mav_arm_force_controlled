@@ -3,22 +3,31 @@
 
 
   <material name="black">
-    <color rgba="0 0 0 1"/>
-  </material>
-  <material name="light_grey">
-    <color rgba="0 0 0 0.2"/>
-  </material>
-  <material name="grey">
-    <color rgba="0 0 0 0.5"/>
+    <color rgba="${0/255} ${0/255} ${0/255} 1.0"/>
   </material>
   <material name="dark_grey">
-    <color rgba="0 0 0 0.7"/>
+    <color rgba="${105/255} {105/255} ${105/255} 1.0"/>
+  </material>
+  <material name="grey">
+    <color rgba="${128/255} ${128/255} ${128/255} 1.0"/>
+  </material>
+  <material name="light_grey">
+    <color rgba="${221/255} ${221/255} ${221/255} 1"/>
   </material>
   <material name="white">
-    <color rgba="1 1 1 1"/>
+    <color rgba="${255/255} ${255/255} ${255/255} 1.0"/>
+  </material>
+  <material name="red">
+    <color rgba="${255/255} ${0/255} ${0/255} 1.0"/>
   </material>
 
   <xacro:property name="pi" value="3.1415269" />
+
+  <xacro:property name="mesh_scale" value="0.001" />
+
+  <xacro:property name="mesh_file_tip" value="package://mav_arm_force_controlled/meshes/tip.stl" />
+  <xacro:property name="mesh_file_tube1" value="package://mav_arm_force_controlled/meshes/tube1.stl" />
+  <xacro:property name="mesh_file_actuator1" value="package://mav_arm_force_controlled/meshes/actuator1.stl" />
 
   <xacro:property name="Baseplate_box_length" value="0.1" />
   <xacro:property name="Baseplate_box_width" value="0.1" />
@@ -114,7 +123,7 @@
         <box size="0.043 0.06 0.0995"/>
       </geometry>
       <origin rpy="0 0 0" xyz="0 0 0.04975"/>
-      <material name="white"/>
+      <material name="dark_grey"/>
     </visual>
     <collision>
       <geometry>
@@ -140,7 +149,7 @@
         <box size="0.031 0.11 0.073"/>
       </geometry>
       <origin rpy="0 0 0" xyz="-0.0155 -0.025 0"/>
-      <material name="white"/>
+      <material name="red"/>
     </visual>
     <collision>
       <geometry>
@@ -242,13 +251,18 @@
 
     <link name="tip">
       <visual>
-        <geometry>
-          <!--
-          <mesh filename="package://mav_arm_force_controlled/meshes/tip.stl"/>
-        -->
+        <!--
+
           <sphere radius="0.007"/>
+      -->
+      <geometry>
+          <mesh filename="${mesh_file_tip}"
+            scale="${mesh_scale} ${mesh_scale} ${mesh_scale}"/>
+
+
+
         </geometry>
-        <origin rpy="0 0 0" xyz="0 0 0"/>
+        <origin rpy="${-pi/2} 0 0" xyz="0 0 0"/>
         <material name="white"/>
       </visual>
       <collision>
