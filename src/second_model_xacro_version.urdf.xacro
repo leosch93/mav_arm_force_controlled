@@ -2,6 +2,8 @@
 <robot name="arm" xmlns:xacro="http://ros.org/wiki/xacro">
 
 
+
+  <!-- Material and Colors-->
   <material name="black">
     <color rgba="${0/255} ${0/255} ${0/255} 1.0"/>
   </material>
@@ -21,29 +23,36 @@
     <color rgba="${255/255} ${0/255} ${0/255} 1.0"/>
   </material>
 
-  <xacro:property name="pi" value="3.1415269" />
 
-  <xacro:property name="mesh_scale" value="0.001" />
+    <!-- General Variables-->
+    <xacro:property name="pi" value="3.1415269" />
 
-  <xacro:property name="mesh_file_tip" value="package://mav_arm_force_controlled/meshes/tip.stl" />
-  <xacro:property name="mesh_file_tube1" value="package://mav_arm_force_controlled/meshes/tube1.stl" />
-  <xacro:property name="mesh_file_actuator1" value="package://mav_arm_force_controlled/meshes/actuator1.stl" />
+    <!-- Mesh files-->
+    <xacro:property name="mesh_file_tip" value="package://mav_arm_force_controlled/meshes/tip.stl" />
+    <xacro:property name="mesh_file_tube1" value="package://mav_arm_force_controlled/meshes/tube1.stl" />
+    <xacro:property name="mesh_file_actuator1" value="package://mav_arm_force_controlled/meshes/actuator1.stl" />
 
-  <xacro:property name="Baseplate_box_length" value="0.1" />
-  <xacro:property name="Baseplate_box_width" value="0.1" />
-  <xacro:property name="Baseplate_box_depth" value="0.001" />
+    <!-- Mesh files are in mm. All mesh files are scaled by the factor 10000-->
+    <xacro:property name="mesh_scale" value="0.001" />
 
-  <xacro:property name="Baseplate_mass" value="0.040063354" />
+    <!-- First element, Base Plate-->
 
-  <xacro:property name="Baseplate_cog_x" value="0.025202079" />
-  <xacro:property name="Baseplate_cog_y" value="0.014500000" />
-  <xacro:property name="Baseplate_cog_z" value="0.000000000" />
-  <xacro:property name="Baseplate_ixx" value="0.000035649" />
-  <xacro:property name="Baseplate_ixy" value="0.000014640" />
-  <xacro:property name="Baseplate_ixz" value="0.000000000" />
-  <xacro:property name="Baseplate_iyy" value="0.000091991" />
-  <xacro:property name="Baseplate_iyz" value="0.000000000" />
-  <xacro:property name="Baseplate_izz" value="0.000073356" />
+    <xacro:property name="Baseplate_box_length" value="0.1" />
+    <xacro:property name="Baseplate_box_width" value="0.1" />
+    <xacro:property name="Baseplate_box_depth" value="0.001" />
+
+    <xacro:property name="Baseplate_mass" value="0.040063354" />
+
+    <xacro:property name="Baseplate_cog_x" value="0.025202079" />
+    <xacro:property name="Baseplate_cog_y" value="0.014500000" />
+    <xacro:property name="Baseplate_cog_z" value="0.000000000" />
+    <xacro:property name="Baseplate_ixx" value="0.000035649" />
+    <xacro:property name="Baseplate_ixy" value="0.000014640" />
+    <xacro:property name="Baseplate_ixz" value="0.000000000" />
+    <xacro:property name="Baseplate_iyy" value="0.000091991" />
+    <xacro:property name="Baseplate_iyz" value="0.000000000" />
+    <xacro:property name="Baseplate_izz" value="0.000073356" />
+
 
 
   <link name="base_plate">
