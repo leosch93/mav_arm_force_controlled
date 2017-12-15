@@ -1,6 +1,6 @@
 <launch>
 
-  <arg name="model" default="$(find mav_arm_force_controlled)/src/second_model_xacro_version.urdf.xacro"/>
+  <arg name="model" default="$(find mav_arm_force_controlled)/src/second_model.urdf.xacro"/>
   <arg name="gui" default="true" />
   <arg name="rvizconfig" default="$(find mav_arm_force_controlled)/rviz/urdf.rviz" />
 

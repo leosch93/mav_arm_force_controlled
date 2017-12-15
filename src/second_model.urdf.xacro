@@ -36,29 +36,28 @@
     <xacro:property name="mesh_scale" value="0.001" />
 
     <!-- First element, Base Plate-->
+    <xacro:property name="baseplate_box_length" value="0.1" />
+    <xacro:property name="baseplate_box_width" value="0.1" />
+    <xacro:property name="baseplate_box_depth" value="0.001" />
 
-    <xacro:property name="Baseplate_box_length" value="0.1" />
-    <xacro:property name="Baseplate_box_width" value="0.1" />
-    <xacro:property name="Baseplate_box_depth" value="0.001" />
+    <xacro:property name="baseplate_mass" value="0.040063354" />
 
-    <xacro:property name="Baseplate_mass" value="0.040063354" />
-
-    <xacro:property name="Baseplate_cog_x" value="0.025202079" />
-    <xacro:property name="Baseplate_cog_y" value="0.014500000" />
-    <xacro:property name="Baseplate_cog_z" value="0.000000000" />
-    <xacro:property name="Baseplate_ixx" value="0.000035649" />
-    <xacro:property name="Baseplate_ixy" value="0.000014640" />
-    <xacro:property name="Baseplate_ixz" value="0.000000000" />
-    <xacro:property name="Baseplate_iyy" value="0.000091991" />
-    <xacro:property name="Baseplate_iyz" value="0.000000000" />
-    <xacro:property name="Baseplate_izz" value="0.000073356" />
-
+    <xacro:property name="baseplate_cog_x" value="0.025202079" />
+    <xacro:property name="baseplate_cog_y" value="0.014500000" />
+    <xacro:property name="baseplate_cog_z" value="0.000000000" />
+    <xacro:property name="baseplate_ixx" value="0.000035649" />
+    <xacro:property name="baseplate_ixy" value="0.000014640" />
+    <xacro:property name="baseplate_ixz" value="0.000000000" />
+    <xacro:property name="baseplate_iyy" value="0.000091991" />
+    <xacro:property name="baseplate_iyz" value="0.000000000" />
+    <xacro:property name="baseplate_izz" value="0.000073356" />
 
 
-  <link name="base_plate">
+
+  <link name="baseplate">
     <visual>
       <geometry>
-        <box size="${Baseplate_box_length} ${Baseplate_box_width} ${Baseplate_box_depth}"/>
+        <box size="${baseplate_box_length} ${baseplate_box_width} ${baseplate_box_depth}"/>
       </geometry>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <!--<origin rpy="0 0 0" xyz="${Baseplate_cog_x} ${Baseplate_cog_y} ${Baseplate_cog_z}"/>-->
@@ -66,36 +65,26 @@
     </visual>
     <collision>
       <geometry>
-        <box size="${Baseplate_box_length} ${Baseplate_box_width} ${Baseplate_box_depth}"/>
+        <box size="${baseplate_box_length} ${baseplate_box_width} ${baseplate_box_depth}"/>
       </geometry>
     </collision>
     <inertia>
-      <mass value="${Baseplate_mass}"/>
-      <inertia ixx="${Baseplate_ixx}" ixy="${Baseplate_ixy}" ixz="${Baseplate_ixz}" iyy="${Baseplate_iyy}" iyz="${Baseplate_iyz}" izz="${Baseplate_izz}" />
+      <mass value="${baseplate_mass}"/>
+      <inertia ixx="${baseplate_ixx}" ixy="${baseplate_ixy}" ixz="${baseplate_ixz}" iyy="${baseplate_iyy}" iyz="${baseplate_iyz}" izz="${baseplate_izz}" />
     </inertia>
   </link>
 
   <joint name="baseplate_to_actuator3" type="fixed">
-    <parent link="base_plate"/>
+    <parent link="baseplate"/>
     <child link="actuator3"/>
-    <origin rpy="0 0 0" xyz="0 0 ${Baseplate_box_depth}"/>
+    <origin rpy="0 0 0" xyz="0 0 ${baseplate_box_depth}"/>
   </joint>
+
 
   <xacro:property name="actuator3_box_x" value="0.04" />
   <xacro:property name="actuator3_box_y" value="0.061" />
   <xacro:property name="actuator3_box_z" value="0.041" />
 
-  <xacro:property name="Baseplate_mass" value="0.22" />
-
-  <xacro:property name="Baseplate_cog_x" value="0.429478272026" />
-  <xacro:property name="Baseplate_cog_y" value="0.001212846812" />
-  <xacro:property name="Baseplate_cog_z" value="0.268013482827" />
-  <xacro:property name="Baseplate_ixx" value="0.000035649" />
-  <xacro:property name="Baseplate_ixy" value="0.000014640" />
-  <xacro:property name="Baseplate_ixz" value="0.000000000" />
-  <xacro:property name="Baseplate_iyy" value="0.000091991" />
-  <xacro:property name="Baseplate_iyz" value="0.000000000" />
-  <xacro:property name="Baseplate_izz" value="0.000073356" />
 
   <link name="actuator3">
     <visual>
@@ -112,7 +101,7 @@
       </geometry>
     </collision>
     <inertia>
-      <mass value="${Baseplate_mass}"/>
+      <mass value="${baseplate_mass}"/>
       <inertia ixx="0.00003691125" ixy="0" ixz="0" iyy="0.00005986125" iyz="0" izz="0.0000607725" />
     </inertia>
   </link>
@@ -171,13 +160,37 @@
     </inertia>
   </link>
 
-  <joint name="actuator2_to_tube2" type="continuous">
+  <joint name="actuator2_to_clamp3" type="continuous">
     <axis rpy="0 0 0" xyz="1 0 0"/>
     <parent link="actuator2"/>
-    <child link="tube2"/>
+    <child link="clamp3"/>
     <origin xyz="-0.031 0 0"/>
   </joint>
 
+  <link name="clamp3">
+    <visual>
+      <geometry>
+        <sphere radius="0.02"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="-0.0155 -0.025 0"/>
+      <material name="red"/>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.02"/>
+      </geometry>
+    </collision>
+    <inertia>
+      <mass value="0.01"/>
+      <inertia ixx="0.0012" ixy="0" ixz="0" iyy="0" iyz="0" izz="0.0012" />
+    </inertia>
+  </link>
+
+  <joint name="clamp3_to_tube2" type="fixed">
+    <parent link="clamp3"/>
+    <child link="tube2"/>
+    <origin xyz="-0.031 0 0"/>
+  </joint>
 
   <link name="tube2">
     <visual>
@@ -198,18 +211,47 @@
     </inertia>
   </link>
 
-    <joint name="tube2_to_actuator1" type="fixed">
+
+    <joint name="tube2_to_clamp2" type="fixed">
       <parent link="tube2"/>
-      <child link="actuator1"/>
-      <origin rpy="0 1.5707963 0" xyz="0 0.6 0"/>
+      <child link="clamp2"/>
+      <origin rpy="0 0 0" xyz="0 0.3 0"/>
     </joint>
+
+
+    <link name="clamp2">
+      <visual>
+        <geometry>
+          <sphere radius="0.02"/>
+        </geometry>
+        <origin rpy="1.570796 0 0" xyz="-0.01 0.3 0"/>
+        <material name="red"/>
+      </visual>
+      <collision>
+        <geometry>
+          <sphere radius="0.02"/>
+        </geometry>
+      </collision>
+      <inertia>
+        <mass value="0.01"/>
+        <inertia ixx="0.0012" ixy="0" ixz="0" iyy="0" iyz="0" izz="0.0012" />
+      </inertia>
+    </link>
+
+      <joint name="clamp2_to_actuator1" type="fixed">
+        <parent link="clamp2"/>
+        <child link="actuator1"/>
+        <origin rpy="0 1.5707963 0" xyz="0 0.3 0"/>
+      </joint>
+
 
 
   <link name="actuator1">
     <visual>
       <geometry>
-        <box size="0.04 0.061 0.041"/>
-      </geometry>
+          <mesh filename="${mesh_file_actuator1}"
+            scale="${mesh_scale} ${mesh_scale} ${mesh_scale}"/>
+        </geometry>
       <origin rpy="0 0 0" xyz="0 -0.0305 0.0205"/>
       <material name="black"/>
     </visual>
@@ -225,11 +267,37 @@
   </link>
 
 
-  <joint name="actuator1_to_tube1" type="continuous">
+  <joint name="actuator1_to_clamp1" type="continuous">
     <axis rpy="0 0 0" xyz="0 0 1"/>
     <parent link="actuator1"/>
-    <child link="tube1"/>
+    <child link="clamp1"/>
     <origin xyz="0 -0.013 0.041"/>
+  </joint>
+
+  <link name="clamp1">
+    <visual>
+      <geometry>
+        <sphere radius="0.02"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 -0.0305 0.0205"/>
+      <material name="red"/>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.02"/>
+      </geometry>
+    </collision>
+    <inertia>
+      <mass value="0.22"/>
+      <inertia ixx="0.00003691125" ixy="0" ixz="0" iyy="0.00005986125" iyz="0" izz="0.0000607725" />
+    </inertia>
+  </link>
+
+
+  <joint name="clamp1_to_tube1" type="fixed">
+    <parent link="clamp1"/>
+    <child link="tube1"/>
+    <origin xyz="0 0 0"/>
   </joint>
 
 
@@ -260,16 +328,9 @@
 
     <link name="tip">
       <visual>
-        <!--
-
-          <sphere radius="0.007"/>
-      -->
       <geometry>
           <mesh filename="${mesh_file_tip}"
             scale="${mesh_scale} ${mesh_scale} ${mesh_scale}"/>
-
-
-
         </geometry>
         <origin rpy="${-pi/2} 0 0" xyz="0 0 0"/>
         <material name="white"/>
@@ -284,4 +345,5 @@
         <inertia ixx="0.00028" ixy="0" ixz="0" iyy="0.00028" iyz="0" izz="0.00028" />
       </inertia>
     </link>
+
 </robot>

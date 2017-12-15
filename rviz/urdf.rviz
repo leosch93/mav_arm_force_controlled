@@ -10,7 +10,7 @@ Panels:
         - /Grid1/Offset1
         - /RobotModel1
         - /RobotModel1/Links1
-        - /RobotModel1/Links1/base_plate1/Orientation1
+        - /RobotModel1/Links1/baseplate1/Orientation1
         - /TF1
         - /TF1/Frames1
         - /TF1/Tree1
@@ -54,7 +54,7 @@ Visualization Manager:
         Z: 0
       Plane: XY
       Plane Cell Count: 20
-      Reference Frame: base_plate
+      Reference Frame: baseplate
       Value: true
     - Alpha: 0.5
       Class: rviz/RobotModel
@@ -81,7 +81,7 @@ Visualization Manager:
           Show Axes: false
           Show Trail: false
           Value: true
-        base_plate:
+        baseplate:
           Alpha: 1
           Show Axes: false
           Show Trail: false
@@ -123,7 +123,7 @@ Visualization Manager:
           Value: true
         actuator3:
           Value: true
-        base_plate:
+        baseplate:
           Value: true
         connectingbox:
           Value: true
@@ -139,7 +139,7 @@ Visualization Manager:
       Show Axes: true
       Show Names: true
       Tree:
-        base_plate:
+        baseplate:
           actuator3:
             connectingbox:
               actuator2:
@@ -153,7 +153,7 @@ Visualization Manager:
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48
-    Fixed Frame: base_plate
+    Fixed Frame: baseplate
     Frame Rate: 30
   Name: root
   Tools:
@@ -166,7 +166,7 @@ Visualization Manager:
     - Class: rviz/SetInitialPose
       Topic: /initialpose
     - Class: rviz/SetGoal
-      Topic: /move_base_simple/goal
+      Topic: /move_basesimple/goal
     - Class: rviz/PublishPoint
       Single click: true
       Topic: /clicked_point
