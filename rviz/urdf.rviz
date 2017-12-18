@@ -66,16 +66,6 @@ Visualization Manager:
         Expand Link Details: false
         Expand Tree: false
         Link Tree Style: Links in Alphabetic Order
-        actuator1:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        actuator2:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
         actuator3:
           Alpha: 1
           Show Axes: false
@@ -87,21 +77,6 @@ Visualization Manager:
           Show Trail: false
           Value: true
         connectingbox:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        tip:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        tube1:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        tube2:
           Alpha: 1
           Show Axes: false
           Show Trail: false
@@ -117,21 +92,11 @@ Visualization Manager:
       Frame Timeout: 15
       Frames:
         All Enabled: true
-        actuator1:
-          Value: true
-        actuator2:
-          Value: true
         actuator3:
           Value: true
         baseplate:
           Value: true
         connectingbox:
-          Value: true
-        tip:
-          Value: true
-        tube1:
-          Value: true
-        tube2:
           Value: true
       Marker Scale: 0.100000001
       Name: TF
@@ -142,12 +107,7 @@ Visualization Manager:
         baseplate:
           actuator3:
             connectingbox:
-              actuator2:
-                tube2:
-                  actuator1:
-                    tube1:
-                      tip:
-                        {}
+              {}
       Update Interval: 0
       Value: true
   Enabled: true
@@ -174,7 +134,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 1.18113554
+      Distance: 0.482701182
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.0599999987
         Stereo Focal Distance: 1
@@ -189,10 +149,10 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.00999999978
-      Pitch: 0.114796609
+      Pitch: 0.434796929
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 1.47171295
+      Yaw: 5.56989336
     Saved:
       - Class: rviz/Orbit
         Distance: 0.518739939

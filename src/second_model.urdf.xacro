@@ -28,44 +28,48 @@
     <xacro:property name="pi" value="3.1415269" />
 
     <!-- Mesh files-->
-    <xacro:property name="mesh_file_tip" value="package://mav_arm_force_controlled/meshes/tip.stl" />
-    <xacro:property name="mesh_file_tube1" value="package://mav_arm_force_controlled/meshes/tube1.stl" />
-    <xacro:property name="mesh_file_actuator1" value="package://mav_arm_force_controlled/meshes/actuator1.stl" />
-
+    <xacro:property name="mesh_file_baseplate" value="package://mav_arm_force_controlled/meshes/baseplate.stl" />
+    <xacro:property name="mesh_file_dyamixel" value="package://mav_arm_force_controlled/meshes/dynamixel.stl" />
+    <xacro:property name="mesh_file_connecting" value="package://mav_arm_force_controlled/meshes/connecting.stl" />
+    <xacro:property name="mesh_file_hebi" value="package://mav_arm_force_controlled/meshes/hebi.stl" />
+    <xacro:property name="mesh_file_hebitotube2" value="package://mav_arm_force_controlled/meshes/hebitotube2.stl" />
+      <!--
+    <xacro:property name="mesh_file_hebhebii" value="package://mav_arm_force_controlled/meshes/hebi.stl" />
+    <xacro:property name="mesh_file_hebi" value="package://mav_arm_force_controlled/meshes/hebi.stl" />
+-->
     <!-- Mesh files are in mm. All mesh files are scaled by the factor 10000-->
     <xacro:property name="mesh_scale" value="0.001" />
 
     <!-- First element, Base Plate-->
-    <xacro:property name="baseplate_box_length" value="0.1" />
-    <xacro:property name="baseplate_box_width" value="0.1" />
-    <xacro:property name="baseplate_box_depth" value="0.001" />
+
 
     <xacro:property name="baseplate_mass" value="0.040063354" />
 
     <xacro:property name="baseplate_cog_x" value="0.025202079" />
-    <xacro:property name="baseplate_cog_y" value="0.014500000" />
-    <xacro:property name="baseplate_cog_z" value="0.000000000" />
-    <xacro:property name="baseplate_ixx" value="0.000035649" />
-    <xacro:property name="baseplate_ixy" value="0.000014640" />
-    <xacro:property name="baseplate_ixz" value="0.000000000" />
-    <xacro:property name="baseplate_iyy" value="0.000091991" />
-    <xacro:property name="baseplate_iyz" value="0.000000000" />
-    <xacro:property name="baseplate_izz" value="0.000073356" />
+    <xacro:property name="baseplate_cog_y" value="0" />
+    <xacro:property name="baseplate_cog_z" value="0.0025" />
+
+    <xacro:property name="baseplate_ixx" value="0.000063973" />
+    <xacro:property name="baseplate_ixy" value="0" />
+    <xacro:property name="baseplate_ixz" value="0.000005877" />
+    <xacro:property name="baseplate_iyy" value="0.000151767" />
+    <xacro:property name="baseplate_iyz" value="0" />
+    <xacro:property name="baseplate_izz" value="0.000214186" />
 
 
 
   <link name="baseplate">
     <visual>
       <geometry>
-        <box size="${baseplate_box_length} ${baseplate_box_width} ${baseplate_box_depth}"/>
-      </geometry>
+          <mesh filename="${mesh_file_baseplate}"
+                scale="${mesh_scale} ${mesh_scale} ${mesh_scale}"/>
+        </geometry>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <!--<origin rpy="0 0 0" xyz="${Baseplate_cog_x} ${Baseplate_cog_y} ${Baseplate_cog_z}"/>-->
-      <material name="dark_grey"/>
+      <material name="black"/>
     </visual>
     <collision>
       <geometry>
-        <box size="${baseplate_box_length} ${baseplate_box_width} ${baseplate_box_depth}"/>
       </geometry>
     </collision>
     <inertia>
@@ -77,32 +81,42 @@
   <joint name="baseplate_to_actuator3" type="fixed">
     <parent link="baseplate"/>
     <child link="actuator3"/>
-    <origin rpy="0 0 0" xyz="0 0 ${baseplate_box_depth}"/>
+    <origin rpy="0 0 ${-pi/2}" xyz="${0.0425+0.0055} 0 ${.005+0.017}"/>
   </joint>
 
 
-  <xacro:property name="actuator3_box_x" value="0.04" />
-  <xacro:property name="actuator3_box_y" value="0.061" />
-  <xacro:property name="actuator3_box_z" value="0.041" />
+
+  <xacro:property name="dynamixel_mass" value="0.126" />
+
+  <xacro:property name="dynamixel_cog_x" value="0.000000008" />
+  <xacro:property name="dynamixel_cog_y" value="-0.01519089" />
+  <xacro:property name="dynamixel_cog_z" value="0.000362847" />
+
+  <xacro:property name="dynamixel_ixx" value="0.000129338" />
+  <xacro:property name="dynamixel_ixy" value="0" />
+  <xacro:property name="dynamixel_ixz" value="0" />
+  <xacro:property name="dynamixel_iyy" value="0.000047045" />
+  <xacro:property name="dynamixel_iyz" value="0.0000014" />
+  <xacro:property name="dynamixel_izz" value="0.000115625" />
 
 
   <link name="actuator3">
     <visual>
       <geometry>
-        <box size="${actuator3_box_x} ${actuator3_box_y} ${actuator3_box_z}"/>
-      </geometry>
-      <origin rpy="0 0 0" xyz="0 0 ${actuator3_box_z/2}"/>
-      <origin rpy="0 0 0" xyz="0 0 ${actuator3_box_z/2}"/>
-      <material name="black"/>
+          <mesh filename="${mesh_file_dyamixel}"
+                scale="${mesh_scale} ${mesh_scale} ${mesh_scale}"/>
+        </geometry>
+        <origin rpy="0 0 0" xyz="0 0 0"/>
+        <material name="black"/>
     </visual>
     <collision>
       <geometry>
-        <box size="${actuator3_box_x} ${actuator3_box_y} ${actuator3_box_z}"/>
       </geometry>
     </collision>
     <inertia>
-      <mass value="${baseplate_mass}"/>
-      <inertia ixx="0.00003691125" ixy="0" ixz="0" iyy="0.00005986125" iyz="0" izz="0.0000607725" />
+      <origin xyz="dynamixel_cog_x dynamixel_cog_y dynamixel_cog_z"/>
+      <mass value="${dynamixel_mass}"/>
+      <inertia ixx="${dynamixel_ixy}" ixy="${dynamixel_ixy}" ixz="${dynamixel_ixz}" iyy="${dynamixel_iyy}" iyz="${dynamixel_iyz}" izz="${dynamixel_izz}" />
     </inertia>
   </link>
 
@@ -111,42 +125,55 @@
     <axis rpy="0 0 0" xyz="0 0 1"/>
     <parent link="actuator3"/>
     <child link="connectingbox"/>
-    <origin xyz="0 0.01755 0.041"/>
+    <origin rpy="0 0 ${pi}" xyz="0 0 ${0.0235+0.0035}"/>
   </joint>
+
+  <xacro:property name="connectionmx64hebi_mass" value=" 0.402140403" />
+
+  <xacro:property name="connectionmx64hebi_cog_x" value="0.000000171" />
+  <xacro:property name="connectionmx64hebi_cog_y" value="0.000278026" />
+  <xacro:property name="connectionmx64hebi_cog_z" value="0.038471524" />
+
+  <xacro:property name="connectionmx64hebi_ixx" value="0.001105121" />
+  <xacro:property name="connectionmx64hebi_ixy" value="0.000000016" />
+  <xacro:property name="connectionmx64hebi_ixz" value="0" />
+  <xacro:property name="connectionmx64hebi_iyy" value="0.001002814" />
+  <xacro:property name="connectionmx64hebi_iyz" value="0.000007088" />
+  <xacro:property name="connectionmx64hebi_izz" value="0.000170487" />
 
 
   <link name="connectingbox">
     <visual>
       <geometry>
-        <box size="0.043 0.06 0.0995"/>
+        <mesh filename="${mesh_file_connecting}"
+              scale="${mesh_scale} ${mesh_scale} ${mesh_scale}"/>
       </geometry>
-      <origin rpy="0 0 0" xyz="0 0 0.04975"/>
-      <material name="dark_grey"/>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <material name="black"/>
     </visual>
     <collision>
       <geometry>
-        <box size="0.043 0.06 0.0995"/>
       </geometry>
     </collision>
     <inertia>
       <mass value="0.01"/>
-      <inertia ixx="0.0012" ixy="0" ixz="0" iyy="0" iyz="0" izz="0.0012" />
+      <inertia ixx="${connectionmx64hebi_ixx}" ixy="${connectionmx64hebi_ixy}" ixz="${connectionmx64hebi_ixz}" iyy="${connectionmx64hebi_iyy}" iyz="${connectionmx64hebi_iyz}" izz="${connectionmx64hebi_izz}" />
     </inertia>
   </link>
-
 
   <joint name="connectingbox_to_actuator2" type="fixed">
     <parent link="connectingbox"/>
     <child link="actuator2"/>
-    <origin xyz="-0.0215 0 0.06"/>
+    <origin rpy="${pi/2} ${0} ${pi/2}"  xyz="${0.025} ${0} ${0.001+0.055}"/>
   </joint>
 
   <link name="actuator2">
     <visual>
       <geometry>
-        <box size="0.031 0.11 0.073"/>
+        <mesh filename="${mesh_file_hebi}"
+              scale="${mesh_scale} ${mesh_scale} ${mesh_scale}"/>
       </geometry>
-      <origin rpy="0 0 0" xyz="-0.0155 -0.025 0"/>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
       <material name="red"/>
     </visual>
     <collision>
@@ -155,25 +182,27 @@
       </geometry>
     </collision>
     <inertia>
-      <mass value="0.01"/>
-      <inertia ixx="0.0012" ixy="0" ixz="0" iyy="0" iyz="0" izz="0.0012" />
+      <mass value="0.34"/>
+      <inertia ixx="0.001" ixy="0" ixz="0" iyy="0.001" iyz="0" izz="0.001" />
     </inertia>
   </link>
 
+
   <joint name="actuator2_to_clamp3" type="continuous">
-    <axis rpy="0 0 0" xyz="1 0 0"/>
+    <axis rpy="0 0 0" xyz="0 0 1"/> />
     <parent link="actuator2"/>
     <child link="clamp3"/>
-    <origin xyz="-0.031 0 0"/>
+    <origin rpy="0 0 0" xyz="${0} 0 ${0.01605}"/>
   </joint>
 
   <link name="clamp3">
     <visual>
       <geometry>
-        <sphere radius="0.02"/>
+        <mesh filename="${mesh_file_hebitotube2}"
+              scale="${mesh_scale} ${mesh_scale} ${mesh_scale}"/>
       </geometry>
-      <origin rpy="0 0 0" xyz="-0.0155 -0.025 0"/>
-      <material name="red"/>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <material name="black"/>
     </visual>
     <collision>
       <geometry>
@@ -182,9 +211,13 @@
     </collision>
     <inertia>
       <mass value="0.01"/>
-      <inertia ixx="0.0012" ixy="0" ixz="0" iyy="0" iyz="0" izz="0.0012" />
+      <inertia ixx="0.000917686" ixy="0.000000017" ixz="0.000000018" iyy="0.000928465" iyz="0.000093232" izz="0.000074342" />
     </inertia>
   </link>
+
+
+
+    <!--
 
   <joint name="clamp3_to_tube2" type="fixed">
     <parent link="clamp3"/>
@@ -225,7 +258,7 @@
           <sphere radius="0.02"/>
         </geometry>
         <origin rpy="1.570796 0 0" xyz="-0.01 0.3 0"/>
-        <material name="red"/>
+        <material name="black"/>
       </visual>
       <collision>
         <geometry>
@@ -280,7 +313,7 @@
         <sphere radius="0.02"/>
       </geometry>
       <origin rpy="0 0 0" xyz="0 -0.0305 0.0205"/>
-      <material name="red"/>
+      <material name="black"/>
     </visual>
     <collision>
       <geometry>
@@ -345,5 +378,5 @@
         <inertia ixx="0.00028" ixy="0" ixz="0" iyy="0.00028" iyz="0" izz="0.00028" />
       </inertia>
     </link>
-
+-->
 </robot>
