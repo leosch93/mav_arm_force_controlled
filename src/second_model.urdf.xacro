@@ -72,10 +72,6 @@
       <!--<origin rpy="0 0 0" xyz="${Baseplate_cog_x} ${Baseplate_cog_y} ${Baseplate_cog_z}"/>-->
       <material name="black"/>
     </visual>
-    <collision>
-      <geometry>
-      </geometry>
-    </collision>
     <inertia>
       <mass value="${baseplate_mass}"/>
       <inertia ixx="${baseplate_ixx}" ixy="${baseplate_ixy}" ixz="${baseplate_ixz}" iyy="${baseplate_iyy}" iyz="${baseplate_iyz}" izz="${baseplate_izz}" />
@@ -113,12 +109,6 @@
         <origin rpy="0 0 0" xyz="0 0 0"/>
         <material name="black"/>
     </visual>
-    <collision>
-      <geometry>
-        <mesh filename="${mesh_file_dyamixel}"
-              scale="${mesh_scale} ${mesh_scale} ${mesh_scale}"/>
-      </geometry>
-    </collision>
     <inertia>
       <origin xyz="dynamixel_cog_x dynamixel_cog_y dynamixel_cog_z"/>
       <mass value="${dynamixel_mass}"/>
@@ -157,10 +147,6 @@
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <material name="black"/>
     </visual>
-    <collision>
-      <geometry>
-      </geometry>
-    </collision>
     <inertia>
       <mass value="0.01"/>
       <inertia ixx="${connectionmx64hebi_ixx}" ixy="${connectionmx64hebi_ixy}" ixz="${connectionmx64hebi_ixz}" iyy="${connectionmx64hebi_iyy}" iyz="${connectionmx64hebi_iyz}" izz="${connectionmx64hebi_izz}" />
@@ -198,11 +184,6 @@
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <material name="red"/>
     </visual>
-    <collision>
-      <geometry>
-        <box size="0.031 0.11 0.073"/>
-      </geometry>
-    </collision>
     <inertia>
       <mass value="actuator2_mass"/>
       <inertia ixx="{actuator2_ixx}" ixy="${actuator2_ixy}" ixz="${actuator2_ixz}" iyy="${actuator2_iyy}" iyz="${actuator2_iyz}" izz="${actuator2_izz}" />
@@ -280,10 +261,6 @@
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <material name="red"/>
     </visual>
-    <collision>
-      <geometry>
-      </geometry>
-    </collision>
     <inertia>
       <mass value="tube2_mass"/>
       <inertia ixx="tube2_ixx" ixy="tube2_ixy" ixz="tube2_ixz" iyy="tube2_iyy" iyz="tube2_iyz" izz="tube2_izz" />
@@ -320,10 +297,6 @@
         <origin rpy="0 0 0" xyz="0 0 0"/>
         <material name="black"/>
       </visual>
-      <collision>
-        <geometry>
-        </geometry>
-      </collision>
       <inertia>
         <mass value="clamp2_mass"/>
         <inertia ixx="clamp2_ixx" ixy="clamp2_ixy" ixz="clamp2_ixz" iyy="clamp2_iyy" iyz="clamp2_iyz" izz="clamp2_izz" />
@@ -358,10 +331,6 @@
         <origin rpy="0 0 0" xyz="0 0 0"/>
         <material name="black"/>
       </visual>
-      <collision>
-        <geometry>
-        </geometry>
-      </collision>
       <inertia>
         <mass value="actuator1_mass"/>
         <inertia ixx="actuator1_ixx" ixy="actuator1_ixy" ixz="actuator1_ixz" iyy="actuator1_iyy" iyz="actuator1_iyz" izz="actuator1_izz" />
@@ -398,10 +367,6 @@
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <material name="red"/>
     </visual>
-    <collision>
-      <geometry>
-      </geometry>
-    </collision>
     <inertia>
       <mass value="clamp1_mass"/>
       <inertia ixx="clamp1_ixx" ixy="clamp1_ixy" ixz="clamp1_ixz" iyy="clamp1_iyy" iyz="clamp1_iyz" izz="clamp1_izz" />
@@ -436,10 +401,6 @@
         <origin rpy="0 0 0" xyz="0 0 0"/>
         <material name="black"/>
       </visual>
-      <collision>
-        <geometry>
-        </geometry>
-      </collision>
       <inertia>
         <mass value="tube1_mass"/>
         <inertia ixx="tube1_ixx" ixy="tube1_ixy" ixz="tube1_ixz" iyy="tube1_iyy" iyz="tube1_iyz" izz="tube1_izz" />
@@ -474,10 +435,6 @@
         <origin rpy="0 0 0" xyz="0 0 0"/>
         <material name="white"/>
       </visual>
-      <collision>
-        <geometry>
-        </geometry>
-      </collision>
       <inertia>
         <mass value="tip_mass"/>
         <inertia ixx="tip_ixx" ixy="tip_ixy" ixz="tip_ixz" iyy="tip_iyy" iyz="tip_iyz" izz="tip_izz" />
