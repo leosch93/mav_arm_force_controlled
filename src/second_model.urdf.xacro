@@ -33,19 +33,19 @@
     <xacro:property name="mesh_file_connecting" value="package://mav_arm_force_controlled/meshes/connecting.stl" />
     <xacro:property name="mesh_file_hebi" value="package://mav_arm_force_controlled/meshes/hebi.stl" />
     <xacro:property name="mesh_file_hebitotube2" value="package://mav_arm_force_controlled/meshes/hebitotube2.stl" />
-    <xacro:property name="mesh_file_mesh_file_tube2" value="package://mav_arm_force_controlled/meshes/mesh_file_tube2.stl" />
-    <xacro:property name="mesh_file_mesh_file_clamp2" value="package://mav_arm_force_controlled/meshes/mesh_file_clamp2.stl" />
-    <xacro:property name="mesh_file_mesh_file_actuator1" value="package://mav_arm_force_controlled/meshes/mesh_file_actuator1.stl" />
-    <xacro:property name="mesh_file_mesh_file_clamp1" value="package://mav_arm_force_controlled/meshes/mesh_file_clamp1.stl" />
-    <xacro:property name="mesh_file_mesh_file_tube1" value="package://mav_arm_force_controlled/meshes/mesh_file_tube1.stl" />
-    <xacro:property name="mesh_file_mesh_file_tip" value="package://mav_arm_force_controlled/meshes/mesh_file_tip.stl" />
+    <xacro:property name="mesh_file_tube2" value="package://mav_arm_force_controlled/meshes/tube2.stl" />
+    <xacro:property name="mesh_file_clamp2" value="package://mav_arm_force_controlled/meshes/tube2todynamixel.stl" />
+    <xacro:property name="mesh_file_actuator1" value="package://mav_arm_force_controlled/meshes/dynamixel.stl" />
+    <xacro:property name="mesh_file_clamp1" value="package://mav_arm_force_controlled/meshes/dynamixeltotube1.stl" />
+    <xacro:property name="mesh_file_tube1" value="package://mav_arm_force_controlled/meshes/tube1.stl" />
+    <xacro:property name="mesh_file_tip" value="package://mav_arm_force_controlled/meshes/tip.stl" />
 
 
     <!-- Mesh files are in mm. All mesh files are scaled by the factor 10000-->
     <xacro:property name="mesh_scale" value="0.001" />
 
-    <!-- First element, Base Plate-->
 
+    <!-- The Mass and inertia elements are defined before the link element-->
 
     <xacro:property name="baseplate_mass" value="0.040063354" />
 
@@ -173,7 +173,7 @@
   <joint name="connectingbox_to_actuator2" type="fixed">
     <parent link="connectingbox"/>
     <child link="actuator2"/>
-    <origin rpy="${pi/2} ${0} ${pi/2}"  xyz="${0.005+0.015} ${0} ${0.055}"/>
+    <origin rpy="${pi/2} ${0} ${pi/2}"  xyz="${0.005+0.015} ${0} ${0.0635}"/>
   </joint>
 
   <xacro:property name="actuator2_mass" value=" 0.34" />
@@ -211,7 +211,7 @@
 
 
   <joint name="actuator2_to_clamp3" type="continuous">
-    <axis rpy="0 0 0" xyz="0 0 1"/> />
+    <axis rpy="0 0 0" xyz="0 1 0"/> />
     <parent link="actuator2"/>
     <child link="clamp3"/>
     <origin rpy="${pi/2} 0 ${-pi/2}" xyz="${0} 0 ${0.01605}"/>
@@ -252,26 +252,24 @@
   </link>
 
 
-
-
   <joint name="clamp3_to_tube2" type="fixed">
     <parent link="clamp3"/>
     <child link="tube2"/>
-    <origin xyz="0 0.05 0"/>
+    <origin rpy="0 ${pi} 0" xyz="${0} ${0.013} ${-0.035}"/>
   </joint>
 
-  <xacro:property name="tube2_mass" value="" />
+  <xacro:property name="tube2_mass" value="0.038201767" />
 
-  <xacro:property name="tube2_cog_x" value="" />
-  <xacro:property name="tube2_cog_y" value="" />
-  <xacro:property name="tube2_cog_z" value="" />
+  <xacro:property name="tube2_cog_x" value="0" />
+  <xacro:property name="tube2_cog_y" value="0" />
+  <xacro:property name="tube2_cog_z" value="0.2" />
 
-  <xacro:property name="tube2_ixx" value="" />
-  <xacro:property name="tube2_ixy" value="" />
-  <xacro:property name="tube2_ixz" value="" />
-  <xacro:property name="tube2_iyy" value="" />
-  <xacro:property name="tube2_iyz" value="" />
-  <xacro:property name="tube2_izz" value="" />
+  <xacro:property name="tube2_ixx" value="0.002039156" />
+  <xacro:property name="tube2_ixy" value="0" />
+  <xacro:property name="tube2_ixz" value="0" />
+  <xacro:property name="tube2_iyy" value="0.002039156" />
+  <xacro:property name="tube2_iyz" value="0" />
+  <xacro:property name="tube2_izz" value="0.000003457" />
 
   <link name="tube2">
     <visual>
@@ -297,21 +295,21 @@
     <joint name="tube2_to_clamp2" type="fixed">
       <parent link="tube2"/>
       <child link="clamp2"/>
-      <origin rpy="0 0 0" xyz="0 0.3 0"/>
+      <origin rpy="${pi/2} 0 ${-pi}" xyz="${0} ${-0.018} ${0.4-0.055}"/>
     </joint>
 
-    <xacro:property name="clamp2_mass" value="" />
+    <xacro:property name="clamp2_mass" value="0.128888247" />
 
-    <xacro:property name="clamp2_cog_x" value="" />
-    <xacro:property name="clamp2_cog_y" value="" />
-    <xacro:property name="clamp2_cog_z" value="" />
+    <xacro:property name="clamp2_cog_x" value="0.000000004" />
+    <xacro:property name="clamp2_cog_y" value="0.02936423" />
+    <xacro:property name="clamp2_cog_z" value="0.016233149" />
 
-    <xacro:property name="clamp2_ixx" value="" />
-    <xacro:property name="clamp2_ixy" value="" />
-    <xacro:property name="clamp2_ixz" value="" />
-    <xacro:property name="clamp2_iyy" value="" />
-    <xacro:property name="clamp2_iyz" value="" />
-    <xacro:property name="clamp2_izz" value="" />
+    <xacro:property name="clamp2_ixx" value="0.00019462" />
+    <xacro:property name="clamp2_ixy" value="0" />
+    <xacro:property name="clamp2_ixz" value="0" />
+    <xacro:property name="clamp2_iyy" value="0.000067787" />
+    <xacro:property name="clamp2_iyz" value="0.000060459" />
+    <xacro:property name="clamp2_izz" value="0.000173715" />
 
     <link name="clamp2">
       <visual>
@@ -319,7 +317,7 @@
           <mesh filename="${mesh_file_clamp2}"
                 scale="${mesh_scale} ${mesh_scale} ${mesh_scale}"/>
         </geometry>
-        <origin rpy="0 0 0" xyz="-0.01 0.3 0"/>
+        <origin rpy="0 0 0" xyz="0 0 0"/>
         <material name="black"/>
       </visual>
       <collision>
@@ -335,21 +333,21 @@
       <joint name="clamp2_to_actuator1" type="fixed">
         <parent link="clamp2"/>
         <child link="actuator1"/>
-        <origin rpy="0 0 0" xyz="0 0.3 0"/>
+        <origin rpy="0 ${pi} 0" xyz="${0} ${0.0056+0.0425} ${-0.017}"/>
       </joint>
 
-      <xacro:property name="actuator1_mass" value="" />
+      <xacro:property name="actuator1_mass" value="0.126" />
 
-      <xacro:property name="actuator1_cog_x" value="" />
-      <xacro:property name="actuator1_cog_y" value="" />
-      <xacro:property name="actuator1_cog_z" value="" />
+      <xacro:property name="actuator1_cog_x" value="0.000000008" />
+      <xacro:property name="actuator1_cog_y" value="-0.01519089" />
+      <xacro:property name="actuator1_cog_z" value="0.000362847" />
 
-      <xacro:property name="actuator1_ixx" value="" />
-      <xacro:property name="actuator1_ixy" value="" />
-      <xacro:property name="actuator1_ixz" value="" />
-      <xacro:property name="actuator1_iyy" value="" />
-      <xacro:property name="actuator1_iyz" value="" />
-      <xacro:property name="actuator1_izz" value="" />
+      <xacro:property name="actuator1_ixx" value="0.000129338" />
+      <xacro:property name="actuator1_ixy" value="0" />
+      <xacro:property name="actuator1_ixz" value="0" />
+      <xacro:property name="actuator1_iyy" value="0.000047045" />
+      <xacro:property name="actuator1_iyz" value="0.0000014" />
+      <xacro:property name="actuator1_izz" value="0.000115625" />
 
     <link name="actuator1">
       <visual>
@@ -371,24 +369,24 @@
     </link>
 
   <joint name="actuator1_to_clamp1" type="continuous">
-    <axis rpy="0 0 0" xyz="0 0 0"/>
+    <axis rpy="0 0 0" xyz="0 0 1"/>
     <parent link="actuator1"/>
     <child link="clamp1"/>
-    <origin xyz="0 0 0"/>
+    <origin rpy="${0} ${0} ${-pi/2}" xyz="${0} ${0} ${0.0235}"/>
   </joint>
 
-  <xacro:property name="clamp1_mass" value="" />
+  <xacro:property name="clamp1_mass" value="0.11739877" />
 
-  <xacro:property name="clamp1_cog_x" value="" />
-  <xacro:property name="clamp1_cog_y" value="" />
-  <xacro:property name="clamp1_cog_z" value="" />
+  <xacro:property name="clamp1_cog_x" value="0.008717092" />
+  <xacro:property name="clamp1_cog_y" value="0.000001711" />
+  <xacro:property name="clamp1_cog_z" value="0.011234631" />
 
-  <xacro:property name="clamp1_ixx" value="" />
-  <xacro:property name="clamp1_ixy" value="" />
-  <xacro:property name="clamp1_ixz" value="" />
-  <xacro:property name="clamp1_iyy" value="" />
-  <xacro:property name="clamp1_iyz" value="" />
-  <xacro:property name="clamp1_izz" value="" />
+  <xacro:property name="clamp1_ixx" value="0.000045773" />
+  <xacro:property name="clamp1_ixy" value="-0.00000003" />
+  <xacro:property name="clamp1_ixz" value="0.000022588" />
+  <xacro:property name="clamp1_iyy" value="0.000079456" />
+  <xacro:property name="clamp1_iyz" value="0.000000001" />
+  <xacro:property name="clamp1_izz" value="0.00007801" />
 
 
   <link name="clamp1">
@@ -397,8 +395,8 @@
         <mesh filename="${mesh_file_clamp1}"
           scale="${mesh_scale} ${mesh_scale} ${mesh_scale}"/>
       </geometry>
-      <origin rpy="0 0 0" xyz="0 -0.0305 0.0205"/>
-      <material name="black"/>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <material name="red"/>
     </visual>
     <collision>
       <geometry>
@@ -413,21 +411,21 @@
   <joint name="clamp1_to_tube1" type="fixed">
     <parent link="clamp1"/>
     <child link="tube1"/>
-    <origin xyz="0 0 0"/>
+    <origin rpy="${0} ${pi/2} ${0}" xyz="${0.015} ${0} ${0.022}"/>
   </joint>
 
-  <xacro:property name="tube1_mass" value="" />
+  <xacro:property name="tube1_mass" value="0.02035752" />
 
-  <xacro:property name="tube1_cog_x" value="" />
-  <xacro:property name="tube1_cog_y" value="" />
-  <xacro:property name="tube1_cog_z" value="" />
+  <xacro:property name="tube1_cog_x" value="0" />
+  <xacro:property name="tube1_cog_y" value="0" />
+  <xacro:property name="tube1_cog_z" value="0.3" />
 
-  <xacro:property name="tube1_ixx" value="" />
-  <xacro:property name="tube1_ixy" value="" />
-  <xacro:property name="tube1_ixz" value="" />
-  <xacro:property name="tube1_iyy" value="" />
-  <xacro:property name="tube1_iyz" value="" />
-  <xacro:property name="tube1_izz" value="" />
+  <xacro:property name="tube1_ixx" value="0.002443367" />
+  <xacro:property name="tube1_ixy" value="0" />
+  <xacro:property name="tube1_ixz" value="0" />
+  <xacro:property name="tube1_iyy" value="0.002443367" />
+  <xacro:property name="tube1_iyz" value="0" />
+  <xacro:property name="tube1_izz" value="0.000000929" />
 
     <link name="tube1">
       <visual>
@@ -436,7 +434,7 @@
             scale="${mesh_scale} ${mesh_scale} ${mesh_scale}"/>
         </geometry>
         <origin rpy="0 0 0" xyz="0 0 0"/>
-        <material name="dark_grey"/>
+        <material name="black"/>
       </visual>
       <collision>
         <geometry>
@@ -451,21 +449,21 @@
     <joint name="tube1_to_tip" type="fixed">
       <parent link="tube1"/>
       <child link="tip"/>
-      <origin xyz="0 0.4 0.007"/>
+      <origin rpy="${0} ${0} ${0}" xyz="${0} ${0} ${0.6}"/>
     </joint>
 
-    <xacro:property name="tip_mass" value="" />
+    <xacro:property name="tip_mass" value="0.039351907" />
 
-    <xacro:property name="tip_cog_x" value="" />
-    <xacro:property name="tip_cog_y" value="" />
-    <xacro:property name="tip_cog_z" value="" />
+    <xacro:property name="tip_cog_x" value="0" />
+    <xacro:property name="tip_cog_y" value="0" />
+    <xacro:property name="tip_cog_z" value="0.000163952" />
 
-    <xacro:property name="tip_ixx" value="" />
-    <xacro:property name="tip_ixy" value="" />
-    <xacro:property name="tip_ixz" value="" />
-    <xacro:property name="tip_iyy" value="" />
-    <xacro:property name="tip_iyz" value="" />
-    <xacro:property name="tip_izz" value="" />
+    <xacro:property name="tip_ixx" value="0.000000758" />
+    <xacro:property name="tip_ixy" value="0" />
+    <xacro:property name="tip_ixz" value="0" />
+    <xacro:property name="tip_iyy" value="0.000000758" />
+    <xacro:property name="tip_iyz" value="0" />
+    <xacro:property name="tip_izz" value="0.0000008" />
 
     <link name="tip">
       <visual>
