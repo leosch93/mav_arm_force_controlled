@@ -1,0 +1,5 @@
+type: "position_controllers/JointGroupPositionController"
+joints:
+ - actuator3_to_connectingplate
+ - actuator2_to_clamp3
+ - actuator1_to_clamp1

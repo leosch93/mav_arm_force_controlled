@@ -1,0 +1,2 @@
+type: "position_controllers/JointPositionController"
+joint: actuator1_to_clamp1

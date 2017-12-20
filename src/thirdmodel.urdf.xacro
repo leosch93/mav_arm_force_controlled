@@ -137,7 +137,6 @@
   </transmission>
 
 
-
   <xacro:property name="connectionmx64hebi_mass" value=" 0.402140403" />
 
   <xacro:property name="connectionmx64hebi_cog_x" value="0.000000171" />
@@ -176,7 +175,7 @@
     <origin rpy="${pi/2} ${0} ${pi/2}"  xyz="${0.005+0.015} ${0} ${0.0635}"/>
   </joint>
 
-  <xacro:property name="actuator2_mass" value=" 0.34" />
+  <xacro:property name="actuator2_mass" value="0.34" />
 
   <xacro:property name="actuator2_cog_x" value="0.000000171" />
   <xacro:property name="actuator2_cog_y" value="0.000278026" />
@@ -200,18 +199,19 @@
     </visual>
     <inertia>
       <mass value="actuator2_mass"/>
-      <inertia ixx="{actuator2_ixx}" ixy="${actuator2_ixy}" ixz="${actuator2_ixz}" iyy="${actuator2_iyy}" iyz="${actuator2_iyz}" izz="${actuator2_izz}" />
+      <inertia ixx="${actuator2_ixx}" ixy="${actuator2_ixy}" ixz="${actuator2_ixz}" iyy="${actuator2_iyy}" iyz="${actuator2_iyz}" izz="${actuator2_izz}" />
     </inertia>
   </link>
 
 
   <joint name="actuator2_to_clamp3" type="continuous">
-    <axis rpy="0 0 0" xyz="0 1 0"/> />
+    <axis rpy="0 0 0" xyz="0 1 0"/>
     <parent link="actuator2"/>
     <child link="clamp3"/>
     <origin rpy="${pi/2} 0 ${-pi/2}" xyz="${0} 0 ${0.01605}"/>
     <limit effort="30" velocity="1.0"/>
   </joint>
+
 
   <transmission name="actuator2_hebi">
     <type>transmission_interface/SimpleTransmission</type>
@@ -223,7 +223,8 @@
     </joint>
   </transmission>
 
-  <xacro:property name="clamp3_mass" value=" 0." />
+
+  <xacro:property name="clamp3_mass" value="0.21" />
 
   <xacro:property name="clamp3_cog_x" value="0.015022968" />
   <xacro:property name="clamp3_cog_y" value="0.001776283" />
@@ -251,8 +252,8 @@
       </geometry>
     </collision>
     <inertia>
-      <mass value="clamp3_mass"/>
-      <inertia ixx="clamp3_ixx" ixy="clamp3_ixy" ixz="clamp3_ixz" iyy="clamp3_iyy" iyz="clamp3_iyz" izz="clamp3_izz" />
+      <mass value="${clamp3_mass}"/>
+      <inertia ixx="${clamp3_ixx}" ixy="${clamp3_ixy}" ixz="${clamp3_ixz}" iyy="${clamp3_iyy}" iyz="${clamp3_iyz}" izz="${clamp3_izz}" />
     </inertia>
   </link>
 
@@ -287,7 +288,7 @@
     </visual>
     <inertia>
       <mass value="tube2_mass"/>
-      <inertia ixx="tube2_ixx" ixy="tube2_ixy" ixz="tube2_ixz" iyy="tube2_iyy" iyz="tube2_iyz" izz="tube2_izz" />
+      <inertia ixx="${tube2_ixx}" ixy="${tube2_ixy}" ixz="${tube2_ixz}" iyy="${tube2_iyy}" iyz="${tube2_iyz}" izz="${tube2_izz}" />
     </inertia>
   </link>
 
@@ -323,7 +324,7 @@
       </visual>
       <inertia>
         <mass value="clamp2_mass"/>
-        <inertia ixx="clamp2_ixx" ixy="clamp2_ixy" ixz="clamp2_ixz" iyy="clamp2_iyy" iyz="clamp2_iyz" izz="clamp2_izz" />
+        <inertia ixx="${clamp2_ixx}" ixy="${clamp2_ixy}" ixz="${clamp2_ixz}" iyy="${clamp2_iyy}" iyz="${clamp2_iyz}" izz="${clamp2_izz}" />
       </inertia>
     </link>
 
@@ -357,7 +358,7 @@
       </visual>
       <inertia>
         <mass value="actuator1_mass"/>
-        <inertia ixx="actuator1_ixx" ixy="actuator1_ixy" ixz="actuator1_ixz" iyy="actuator1_iyy" iyz="actuator1_iyz" izz="actuator1_izz" />
+        <inertia ixx="${actuator1_ixx}" ixy="${actuator1_ixy}" ixz="${actuator1_ixz}" iyy="${actuator1_iyy}" iyz="${actuator1_iyz}" izz="${actuator1_izz}" />
       </inertia>
     </link>
 
@@ -368,6 +369,8 @@
     <origin rpy="${0} ${0} ${-pi/2}" xyz="${0} ${0} ${0.0235}"/>
     <limit effort="30" velocity="1.0"/>
   </joint>
+
+
 
   <transmission name="actuator1_dynamixel">
     <type>transmission_interface/SimpleTransmission</type>
@@ -404,7 +407,7 @@
     </visual>
     <inertia>
       <mass value="clamp1_mass"/>
-      <inertia ixx="clamp1_ixx" ixy="clamp1_ixy" ixz="clamp1_ixz" iyy="clamp1_iyy" iyz="clamp1_iyz" izz="clamp1_izz" />
+      <inertia ixx="${clamp1_ixx}" ixy="${clamp1_ixy}" ixz="${clamp1_ixz}" iyy="${clamp1_iyy}" iyz="${clamp1_iyz}" izz="${clamp1_izz}" />
     </inertia>
   </link>
 
@@ -438,7 +441,7 @@
       </visual>
       <inertia>
         <mass value="tube1_mass"/>
-        <inertia ixx="tube1_ixx" ixy="tube1_ixy" ixz="tube1_ixz" iyy="tube1_iyy" iyz="tube1_iyz" izz="tube1_izz" />
+        <inertia ixx="${tube1_ixx}" ixy="${tube1_ixy}" ixz="${tube1_ixz}" iyy="${tube1_iyy}" iyz="${tube1_iyz}" izz="${tube1_izz}" />
       </inertia>
     </link>
 
@@ -472,7 +475,7 @@
       </visual>
       <inertia>
         <mass value="tip_mass"/>
-        <inertia ixx="tip_ixx" ixy="tip_ixy" ixz="tip_ixz" iyy="tip_iyy" iyz="tip_iyz" izz="tip_izz" />
+        <inertia ixx="${tip_ixx}" ixy="${tip_ixy}" ixz="${tip_ixz}" iyy="${tip_iyy}" iyz="${tip_iyz}" izz="${tip_izz}" />
       </inertia>
     </link>
 
