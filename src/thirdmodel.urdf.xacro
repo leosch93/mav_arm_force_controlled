@@ -3,24 +3,25 @@
 
 
 
+
   <!-- Material and Colors-->
   <material name="black">
-    <color rgba="${0/255} ${0/255} ${0/255} 1.0"/>
+    <color rgba="${0/255} ${0/255} ${0/255} 1"/>
   </material>
   <material name="dark_grey">
-    <color rgba="${105/255} {105/255} ${105/255} 1.0"/>
+    <color rgba="${105/255} ${105/255} ${105/255} 1"/>
   </material>
   <material name="grey">
-    <color rgba="${128/255} ${128/255} ${128/255} 1.0"/>
+    <color rgba="${128/255} ${128/255} ${128/255} 1"/>
   </material>
   <material name="light_grey">
     <color rgba="${221/255} ${221/255} ${221/255} 1"/>
   </material>
   <material name="white">
-    <color rgba="${255/255} ${255/255} ${255/255} 1.0"/>
+    <color rgba="${255/255} ${255/255} ${255/255} 1"/>
   </material>
   <material name="red">
-    <color rgba="${255/255} ${0/255} ${0/255} 1.0"/>
+    <color rgba="${255/255} ${0/255} ${0/255} 1"/>
   </material>
 
 
@@ -72,10 +73,16 @@
       <!--<origin rpy="0 0 0" xyz="${Baseplate_cog_x} ${Baseplate_cog_y} ${Baseplate_cog_z}"/>-->
       <material name="black"/>
     </visual>
-    <inertia>
+    <collision>
+      <geometry>
+        <box size="0.1 0.1 0.1"/>
+        </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </collision>
+    <inertial>
       <mass value="${baseplate_mass}"/>
       <inertia ixx="${baseplate_ixx}" ixy="${baseplate_ixy}" ixz="${baseplate_ixz}" iyy="${baseplate_iyy}" iyz="${baseplate_iyz}" izz="${baseplate_izz}" />
-    </inertia>
+    </inertial>
   </link>
 
   <joint name="baseplate_to_actuator3" type="fixed">
@@ -109,15 +116,20 @@
         <origin rpy="0 0 0" xyz="0 0 0"/>
         <material name="black"/>
     </visual>
-    <inertia>
-      <origin xyz="dynamixel_cog_x dynamixel_cog_y dynamixel_cog_z"/>
+    <collision>
+      <geometry>
+        <box size="0.1 0.1 0.1"/>
+        </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </collision>
+    <inertial>
       <mass value="${dynamixel_mass}"/>
       <inertia ixx="${dynamixel_ixy}" ixy="${dynamixel_ixy}" ixz="${dynamixel_ixz}" iyy="${dynamixel_iyy}" iyz="${dynamixel_iyz}" izz="${dynamixel_izz}" />
-    </inertia>
+    </inertial>
   </link>
 
 
-  <joint name="actuator3_to_connectingplate" type="continuous">
+  <joint name="actuator_to_connectingbox" type="continuous">
     <axis rpy="0 0 0" xyz="0 0 1"/>
     <parent link="actuator3"/>
     <child link="connectingbox"/>
@@ -126,12 +138,12 @@
   </joint>
 
 
-  <transmission name="actuator3_dynamixel">
+  <transmission name="actuator3_dynamixel_trans">
     <type>transmission_interface/SimpleTransmission</type>
-    <actuator name="$actuator3_dynamixel">
+    <actuator name="actuator3_dynamixel_a">
       <mechanicalReduction>1</mechanicalReduction>
     </actuator>
-    <joint name="actuator3_to_connectingplate">
+    <joint name="actuator_to_connectingbox">
       <hardwareInterface>PositionJointInterface</hardwareInterface>
     </joint>
   </transmission>
@@ -160,10 +172,16 @@
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <material name="black"/>
     </visual>
-    <inertia>
-      <mass value="0.01"/>
+    <collision>
+      <geometry>
+        <box size="0.1 0.1 0.1"/>
+        </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </collision>
+    <inertial>
+      <mass value="${connectionmx64hebi_mass}"/>
       <inertia ixx="${connectionmx64hebi_ixx}" ixy="${connectionmx64hebi_ixy}" ixz="${connectionmx64hebi_ixz}" iyy="${connectionmx64hebi_iyy}" iyz="${connectionmx64hebi_iyz}" izz="${connectionmx64hebi_izz}" />
-    </inertia>
+    </inertial>
   </link>
 
 
@@ -197,10 +215,16 @@
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <material name="red"/>
     </visual>
-    <inertia>
-      <mass value="actuator2_mass"/>
+    <collision>
+      <geometry>
+        <box size="0.1 0.1 0.1"/>
+        </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </collision>
+    <inertial>
+      <mass value="${actuator2_mass}"/>
       <inertia ixx="${actuator2_ixx}" ixy="${actuator2_ixy}" ixz="${actuator2_ixz}" iyy="${actuator2_iyy}" iyz="${actuator2_iyz}" izz="${actuator2_izz}" />
-    </inertia>
+    </inertial>
   </link>
 
 
@@ -213,7 +237,7 @@
   </joint>
 
 
-  <transmission name="actuator2_hebi">
+  <!-- <transmission name="actuator2_hebi">
     <type>transmission_interface/SimpleTransmission</type>
     <actuator name="$actuator2_hebi">
       <mechanicalReduction>1</mechanicalReduction>
@@ -221,7 +245,7 @@
     <joint name="actuator2_to_clamp3">
       <hardwareInterface>PositionJointInterface</hardwareInterface>
     </joint>
-  </transmission>
+  </transmission> -->
 
 
   <xacro:property name="clamp3_mass" value="0.21" />
@@ -248,13 +272,14 @@
     </visual>
     <collision>
       <geometry>
-        <sphere radius="0.02"/>
-      </geometry>
+        <box size="0.1 0.1 0.1"/>
+        </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
     </collision>
-    <inertia>
+    <inertial>
       <mass value="${clamp3_mass}"/>
       <inertia ixx="${clamp3_ixx}" ixy="${clamp3_ixy}" ixz="${clamp3_ixz}" iyy="${clamp3_iyy}" iyz="${clamp3_iyz}" izz="${clamp3_izz}" />
-    </inertia>
+    </inertial>
   </link>
 
 
@@ -286,10 +311,16 @@
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <material name="red"/>
     </visual>
-    <inertia>
-      <mass value="tube2_mass"/>
+    <collision>
+      <geometry>
+        <box size="0.1 0.1 0.1"/>
+        </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </collision>
+    <inertial>
+      <mass value="${tube2_mass}"/>
       <inertia ixx="${tube2_ixx}" ixy="${tube2_ixy}" ixz="${tube2_ixz}" iyy="${tube2_iyy}" iyz="${tube2_iyz}" izz="${tube2_izz}" />
-    </inertia>
+    </inertial>
   </link>
 
 
@@ -322,10 +353,16 @@
         <origin rpy="0 0 0" xyz="0 0 0"/>
         <material name="black"/>
       </visual>
-      <inertia>
-        <mass value="clamp2_mass"/>
+      <collision>
+        <geometry>
+          <box size="0.1 0.1 0.1"/>
+          </geometry>
+        <origin rpy="0 0 0" xyz="0 0 0"/>
+      </collision>
+      <inertial>
+        <mass value="${clamp2_mass}"/>
         <inertia ixx="${clamp2_ixx}" ixy="${clamp2_ixy}" ixz="${clamp2_ixz}" iyy="${clamp2_iyy}" iyz="${clamp2_iyz}" izz="${clamp2_izz}" />
-      </inertia>
+      </inertial>
     </link>
 
       <joint name="clamp2_to_actuator1" type="fixed">
@@ -356,10 +393,16 @@
         <origin rpy="0 0 0" xyz="0 0 0"/>
         <material name="black"/>
       </visual>
-      <inertia>
-        <mass value="actuator1_mass"/>
+      <collision>
+        <geometry>
+          <box size="0.1 0.1 0.1"/>
+          </geometry>
+        <origin rpy="0 0 0" xyz="0 0 0"/>
+      </collision>
+      <inertial>
+        <mass value="${actuator1_mass}"/>
         <inertia ixx="${actuator1_ixx}" ixy="${actuator1_ixy}" ixz="${actuator1_ixz}" iyy="${actuator1_iyy}" iyz="${actuator1_iyz}" izz="${actuator1_izz}" />
-      </inertia>
+      </inertial>
     </link>
 
   <joint name="actuator1_to_clamp1" type="continuous">
@@ -372,7 +415,7 @@
 
 
 
-  <transmission name="actuator1_dynamixel">
+  <!-- <transmission name="actuator1_dynamixel">
     <type>transmission_interface/SimpleTransmission</type>
     <actuator name="$actuator1_dynamixel">
       <mechanicalReduction>1</mechanicalReduction>
@@ -380,7 +423,7 @@
     <joint name="actuator1_to_clamp1">
       <hardwareInterface>PositionJointInterface</hardwareInterface>
     </joint>
-  </transmission>
+  </transmission> -->
 
   <xacro:property name="clamp1_mass" value="0.11739877" />
 
@@ -405,10 +448,16 @@
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <material name="red"/>
     </visual>
-    <inertia>
-      <mass value="clamp1_mass"/>
+    <collision>
+      <geometry>
+        <box size="0.1 0.1 0.1"/>
+        </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </collision>
+    <inertial>
+      <mass value="${clamp1_mass}"/>
       <inertia ixx="${clamp1_ixx}" ixy="${clamp1_ixy}" ixz="${clamp1_ixz}" iyy="${clamp1_iyy}" iyz="${clamp1_iyz}" izz="${clamp1_izz}" />
-    </inertia>
+    </inertial>
   </link>
 
   <joint name="clamp1_to_tube1" type="fixed">
@@ -439,10 +488,16 @@
         <origin rpy="0 0 0" xyz="0 0 0"/>
         <material name="black"/>
       </visual>
-      <inertia>
-        <mass value="tube1_mass"/>
+      <collision>
+        <geometry>
+          <box size="0.1 0.1 0.1"/>
+          </geometry>
+        <origin rpy="0 0 0" xyz="0 0 0"/>
+      </collision>
+      <inertial>
+        <mass value="${tube1_mass}"/>
         <inertia ixx="${tube1_ixx}" ixy="${tube1_ixy}" ixz="${tube1_ixz}" iyy="${tube1_iyy}" iyz="${tube1_iyz}" izz="${tube1_izz}" />
-      </inertia>
+      </inertial>
     </link>
 
     <joint name="tube1_to_tip" type="fixed">
@@ -473,10 +528,16 @@
         <origin rpy="0 0 0" xyz="0 0 0"/>
         <material name="white"/>
       </visual>
-      <inertia>
-        <mass value="tip_mass"/>
+      <collision>
+        <geometry>
+          <box size="0.1 0.1 0.1"/>
+          </geometry>
+        <origin rpy="0 0 0" xyz="0 0 0"/>
+      </collision>
+      <inertial>
+        <mass value="${tip_mass}"/>
         <inertia ixx="${tip_ixx}" ixy="${tip_ixy}" ixz="${tip_ixz}" iyy="${tip_iyy}" iyz="${tip_iyz}" izz="${tip_izz}" />
-      </inertia>
+      </inertial>
     </link>
 
 
