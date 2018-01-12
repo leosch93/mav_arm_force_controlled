@@ -7,33 +7,34 @@
   </include>
 
   <node name="rviz" pkg="rviz" type="rviz" args="-d $(arg rvizconfig)" />
+  <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />
 
 
 
-  <rosparam command="load"
+    <rosparam command="load"
               file="$(find mav_arm_force_controlled)/config/joints.yaml"
               ns="arm_joint_state_controller" />
 
-  <rosparam command="load"
+    <rosparam command="load"
               file="$(find mav_arm_force_controlled)/config/actuator3.yaml"
-              ns="joint3_controller" />
-
-  <rosparam command="load"
+              ns="arm_3_controller" />
+    <rosparam command="load"
               file="$(find mav_arm_force_controlled)/config/actuator2.yaml"
-              ns="joint2_controller" />
-
-  <rosparam command="load"
+              ns="arm_2_controller" />
+    <rosparam command="load"
               file="$(find mav_arm_force_controlled)/config/actuator1.yaml"
-              ns="joint1_controller" />
+              ns="arm_1_controller" />
 
+    <rosparam command="load"
+              file="$(find mav_arm_force_controlled)/config/actuators.yaml"
+              ns="arm_1_3_controller" />
 
-
-  <node name="arm_controller_spawner" pkg="controller_manager" type="spawner"
+    <node name="r2d2_controller_spawner" pkg="controller_manager" type="spawner"
       args="arm_joint_state_controller
-            joint3_controller
-            joint2_controller
-            joint1_controller
+            arm_3_controller
+            arm_2_controller
+            arm_1_controller
+            arm_1_3_controller
             --shutdown-timeout 3"/>
-
 
 </launch>

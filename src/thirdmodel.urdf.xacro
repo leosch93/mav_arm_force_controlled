@@ -2,8 +2,6 @@
 <robot name="arm" xmlns:xacro="http://ros.org/wiki/xacro">
 
 
-
-
   <!-- Material and Colors-->
   <material name="black">
     <color rgba="${0/255} ${0/255} ${0/255} 1"/>
@@ -42,7 +40,7 @@
     <xacro:property name="mesh_file_tip" value="package://mav_arm_force_controlled/meshes/tip.stl" />
 
 
-    <!-- Mesh files are in mm. All mesh files are scaled by the factor 10000-->
+    <!-- Mesh files are in mm. All mesh files are scaled by the factor 1000-->
     <xacro:property name="mesh_scale" value="0.001" />
 
 
@@ -140,7 +138,7 @@
 
   <transmission name="actuator3_dynamixel_trans">
     <type>transmission_interface/SimpleTransmission</type>
-    <actuator name="actuator3_dynamixel_a">
+    <actuator name="actuator3_dynamixel_motor">
       <mechanicalReduction>1</mechanicalReduction>
     </actuator>
     <joint name="actuator_to_connectingbox">
@@ -237,15 +235,15 @@
   </joint>
 
 
-  <!-- <transmission name="actuator2_hebi">
+  <transmission name="actuator2_hebi_trans">
     <type>transmission_interface/SimpleTransmission</type>
-    <actuator name="$actuator2_hebi">
+    <actuator name="$actuator2_hebi_motor">
       <mechanicalReduction>1</mechanicalReduction>
     </actuator>
     <joint name="actuator2_to_clamp3">
       <hardwareInterface>PositionJointInterface</hardwareInterface>
     </joint>
-  </transmission> -->
+  </transmission>
 
 
   <xacro:property name="clamp3_mass" value="0.21" />
@@ -415,15 +413,15 @@
 
 
 
-  <!-- <transmission name="actuator1_dynamixel">
+  <transmission name="actuator1_dynamixel_trans">
     <type>transmission_interface/SimpleTransmission</type>
-    <actuator name="$actuator1_dynamixel">
+    <actuator name="$actuator1_dynamixel_motor">
       <mechanicalReduction>1</mechanicalReduction>
     </actuator>
     <joint name="actuator1_to_clamp1">
       <hardwareInterface>PositionJointInterface</hardwareInterface>
     </joint>
-  </transmission> -->
+  </transmission>
 
   <xacro:property name="clamp1_mass" value="0.11739877" />
 
