@@ -68,8 +68,7 @@
                 scale="${mesh_scale} ${mesh_scale} ${mesh_scale}"/>
         </geometry>
       <origin rpy="0 0 0" xyz="0 0 0"/>
-      <!--<origin rpy="0 0 0" xyz="${Baseplate_cog_x} ${Baseplate_cog_y} ${Baseplate_cog_z}"/>-->
-      <material name="black"/>
+       <material name="black"/>
     </visual>
     <collision>
       <geometry>
