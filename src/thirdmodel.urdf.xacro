@@ -48,6 +48,7 @@
 
     <xacro:property name="baseplate_mass" value="0.040063354" />
 
+
     <xacro:property name="baseplate_cog_x" value="0.025202079" />
     <xacro:property name="baseplate_cog_y" value="0" />
     <xacro:property name="baseplate_cog_z" value="0.0025" />
@@ -59,7 +60,13 @@
     <xacro:property name="baseplate_iyz" value="0" />
     <xacro:property name="baseplate_izz" value="0.000214186" />
 
+  <link name="world"/>
 
+  <joint name="fixed" type="fixed">
+    <parent link="world"/>
+    <child link="baseplate"/>
+    <origin xyz="0.5 0.5 0" rpy="0 0 0" />
+  </joint>
 
   <link name="baseplate">
     <visual>
@@ -141,9 +148,10 @@
       <mechanicalReduction>1</mechanicalReduction>
     </actuator>
     <joint name="actuator_to_connectingbox">
-      <hardwareInterface>PositionJointInterface</hardwareInterface>
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
     </joint>
   </transmission>
+
 
 
   <xacro:property name="connectionmx64hebi_mass" value=" 0.402140403" />
@@ -240,7 +248,7 @@
       <mechanicalReduction>1</mechanicalReduction>
     </actuator>
     <joint name="actuator2_to_clamp3">
-      <hardwareInterface>PositionJointInterface</hardwareInterface>
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
     </joint>
   </transmission>
 
@@ -418,7 +426,7 @@
       <mechanicalReduction>1</mechanicalReduction>
     </actuator>
     <joint name="actuator1_to_clamp1">
-      <hardwareInterface>PositionJointInterface</hardwareInterface>
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
     </joint>
   </transmission>
 
@@ -540,9 +548,10 @@
 
     <gazebo>
       <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
-        <robotNamespace>/</robotNamespace>
+        <robotNamespace>/arm</robotNamespace>
       </plugin>
     </gazebo>
 
+        <!--<robotSimType>gazebo_ros_control/DefaultRobotHWSim</robotSimType>-->
 
 </robot>
