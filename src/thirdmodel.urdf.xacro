@@ -1,6 +1,7 @@
 <?xml version="1.0"?>
 <robot name="arm" xmlns:xacro="http://ros.org/wiki/xacro">
 
+    <!--<selfCollide>true</selfCollide>-->
 
   <!-- Material and Colors-->
   <material name="black">
@@ -72,6 +73,7 @@
     <xacro:property name="baseplate_iyy" value="0.000151767" />
     <xacro:property name="baseplate_iyz" value="0" />
     <xacro:property name="baseplate_izz" value="0.000214186" />
+
 
   <link name="world"/>
 
@@ -575,6 +577,41 @@
         <robotNamespace>/arm</robotNamespace>
       </plugin>
     </gazebo>
+
+    <gazebo reference="baseplate">
+      <selfCollide>true</selfCollide>
+    </gazebo>
+    <gazebo reference="actuator3">
+      <selfCollide>true</selfCollide>
+    </gazebo>
+    <gazebo reference="connectingbox">
+      <selfCollide>true</selfCollide>
+    </gazebo>
+    <gazebo reference="actuator2">
+      <selfCollide>true</selfCollide>
+    </gazebo>
+    <gazebo reference="clamp3">
+      <selfCollide>true</selfCollide>
+    </gazebo>
+    <gazebo reference="tube2">
+      <selfCollide>true</selfCollide>
+    </gazebo>
+    <gazebo reference="clamp2">
+      <selfCollide>true</selfCollide>
+    </gazebo>
+    <gazebo reference="actuator1">
+      <selfCollide>true</selfCollide>
+    </gazebo>
+    <gazebo reference="clamp1">
+      <selfCollide>true</selfCollide>
+    </gazebo>
+    <gazebo reference="tube1">
+      <selfCollide>true</selfCollide>
+    </gazebo>
+    <gazebo reference="tip">
+      <selfCollide>true</selfCollide>
+    </gazebo>
+
 
         <!--<robotSimType>gazebo_ros_control/DefaultRobotHWSim</robotSimType>-->
 
