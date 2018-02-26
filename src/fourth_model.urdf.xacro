@@ -36,6 +36,7 @@
     <xacro:property name="mesh_file_tube2" value="package://mav_arm_force_controlled/meshes/geometry_2.0/voliro_arm_tube2.stl" />
     <xacro:property name="mesh_file_tube_adapter" value="package://mav_arm_force_controlled/meshes/geometry_2.0/voliro_arm_tube_adapter.stl" />
     <xacro:property name="mesh_file_actuator1" value="package://mav_arm_force_controlled/meshes/geometry_2.0/voliro_arm_dynamixel.stl" />
+    <xacro:property name="mesh_file_clamp1" value="package://mav_arm_force_controlled/meshes/geometry_2.0/voliro_arm_clamp1.stl" />
     <xacro:property name="mesh_file_tube1" value="package://mav_arm_force_controlled/meshes/geometry_2.0/voliro_arm_tube1.stl" />
     <xacro:property name="mesh_file_tip" value="package://mav_arm_force_controlled/meshes/geometry_2.0/voliro_arm_tip.stl" />
 
@@ -49,6 +50,7 @@
     <xacro:property name="s_mesh_file_tube2" value="package://mav_arm_force_controlled/meshes/simplified_geometry_2.0/voliro_arm_tube2.stl" />
     <xacro:property name="s_mesh_file_tube_adapter" value="package://mav_arm_force_controlled/meshes/simplified_geometry_2.0/voliro_arm_tube_adapter.stl" />
     <xacro:property name="s_mesh_file_actuator1" value="package://mav_arm_force_controlled/meshes/simplified_geometry_2.0/voliro_arm_dynamixel.stl" />
+    <xacro:property name="s_mesh_file_clamp1" value="package://mav_arm_force_controlled/meshes/simplified_geometry_2.0/voliro_arm_clamp1.stl" />
     <xacro:property name="s_mesh_file_tube1" value="package://mav_arm_force_controlled/meshes/simplified_geometry_2.0/voliro_arm_tube1.stl" />
     <xacro:property name="s_mesh_file_tip" value="package://mav_arm_force_controlled/meshes/simplified_geometry_2.0/voliro_arm_tip.stl" />
 
@@ -435,12 +437,11 @@
       </inertial>
     </link>
 
-  <!--
   <joint name="actuator1_to_clamp1" type="continuous">
     <axis rpy="0 0 0" xyz="0 0 1"/>
     <parent link="actuator1"/>
     <child link="clamp1"/>
-    <origin rpy="${0} ${0} ${-pi/2}" xyz="${0} ${0} ${0.0235}"/>
+    <origin rpy="${0} ${0} ${0}" xyz="${0} ${0} ${0.0235}"/>
     <limit effort="30" velocity="1.0"/>
   </joint>
 
@@ -456,18 +457,18 @@
     </joint>
   </transmission>
 
-  <xacro:property name="clamp1_mass" value="0.11739877" />
+  <xacro:property name="clamp1_mass" value="0.084238767" />
 
-  <xacro:property name="clamp1_cog_x" value="0.008717092" />
-  <xacro:property name="clamp1_cog_y" value="0.000001711" />
-  <xacro:property name="clamp1_cog_z" value="0.011234631" />
-
-  <xacro:property name="clamp1_ixx" value="0.000045773" />
-  <xacro:property name="clamp1_ixy" value="-0.00000003" />
-  <xacro:property name="clamp1_ixz" value="0.000022588" />
-  <xacro:property name="clamp1_iyy" value="0.000079456" />
-  <xacro:property name="clamp1_iyz" value="0.000000001" />
-  <xacro:property name="clamp1_izz" value="0.00007801" />
+  <xacro:property name="clamp1_cog_x" value="-0.000000709384" />
+  <xacro:property name="clamp1_cog_y" value="0.003831382911" />
+  <xacro:property name="clamp1_cog_z" value="0.007840028704" />
+ <!-- Todo change units -->
+  <xacro:property name="clamp1_ixx" value="35.98639204" />
+  <xacro:property name="clamp1_ixy" value="-0.036707373" />
+  <xacro:property name="clamp1_ixz" value="-0.00032096" />
+  <xacro:property name="clamp1_iyy" value="26.23411723" />
+  <xacro:property name="clamp1_iyz" value="7.078559572" />
+  <xacro:property name="clamp1_izz" value="43.83528986" />
 
 
   <link name="clamp1">
@@ -492,10 +493,11 @@
     </inertial>
   </link>
 
+
   <joint name="clamp1_to_tube1" type="fixed">
     <parent link="clamp1"/>
     <child link="tube1"/>
-    <origin rpy="${0} ${pi/2} ${0}" xyz="${0.015} ${0} ${0.022}"/>
+    <origin rpy="${0} ${pi/2} ${pi/2}" xyz="${0} ${0.016} ${0.022}"/>
   </joint>
 
   <xacro:property name="tube1_mass" value="0.02035752" />
@@ -539,18 +541,18 @@
       <origin rpy="${0} ${0} ${0}" xyz="${0} ${0} ${0.6}"/>
     </joint>
 
-    <xacro:property name="tip_mass" value="0.039351907" />
+    <xacro:property name="tip_mass" value="0.001658447" />
 
     <xacro:property name="tip_cog_x" value="0" />
     <xacro:property name="tip_cog_y" value="0" />
     <xacro:property name="tip_cog_z" value="0.000163952" />
-
-    <xacro:property name="tip_ixx" value="0.000000758" />
+<!-- To Do change units -->
+    <xacro:property name="tip_ixx" value="0.031944763" />
     <xacro:property name="tip_ixy" value="0" />
     <xacro:property name="tip_ixz" value="0" />
-    <xacro:property name="tip_iyy" value="0.000000758" />
+    <xacro:property name="tip_iyy" value="0.031944763" />
     <xacro:property name="tip_iyz" value="0" />
-    <xacro:property name="tip_izz" value="0.0000008" />
+    <xacro:property name="tip_izz" value="0.033720057" />
 
     <link name="tip">
       <visual>
@@ -573,7 +575,7 @@
         <inertia ixx="${tip_ixx}" ixy="${tip_ixy}" ixz="${tip_ixz}" iyy="${tip_iyy}" iyz="${tip_iyz}" izz="${tip_izz}" />
       </inertial>
     </link>
--->
+
 
     <gazebo>
       <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
