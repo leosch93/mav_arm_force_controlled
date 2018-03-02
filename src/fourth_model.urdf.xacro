@@ -74,7 +74,7 @@
     <xacro:property name="baseplate_cog_y" value="0.03245573125" />
     <xacro:property name="baseplate_cog_z" value="0.01488134446" />
 
-<!-- To Do change units -->
+
     <xacro:property name="baseplate_ixx" value="${60.4589042*uc_inertia}" />
     <xacro:property name="baseplate_ixy" value="${-23.91373491*uc_inertia}" />
     <xacro:property name="baseplate_ixz" value="${-9.415308277*uc_inertia}" />
@@ -175,7 +175,7 @@
     </joint>
   </transmission>
 
-<!-- To Do change unit -->
+
 
   <xacro:property name="bearing_mass" value="0.123" />
 
@@ -261,7 +261,7 @@
     <parent link="actuator2"/>
     <child link="clamp2"/>
     <origin rpy="${pi/2} ${0} ${-pi/2}" xyz="${0} ${0} ${0.01605}"/>
-    <limit effort="30" velocity="1.0"/>
+    <limit effort="100" velocity="1.0"/>
   </joint>
 
 
@@ -281,7 +281,7 @@
   <xacro:property name="clamp2_cog_x" value="0.00000000019" />
   <xacro:property name="clamp2_cog_y" value="0.008.118243555" />
   <xacro:property name="clamp2_cog_z" value="-0.01350332735" />
-<!-- To do change units-->
+
   <xacro:property name="clamp2_ixx" value="${21.61924342*uc_inertia}" />
   <xacro:property name="clamp2_ixy" value="${-0.000002107*uc_inertia}" />
   <xacro:property name="clamp2_ixz" value="${0.000000228*uc_inertia}" />
@@ -366,7 +366,7 @@
     <xacro:property name="clamp2_cog_x" value="-0.000051031" />
     <xacro:property name="clamp2_cog_y" value="-5.987489264" />
     <xacro:property name="clamp2_cog_z" value="20" />
-    <!-- To Do change units -->
+
     <xacro:property name="clamp2_ixx" value="${27.76777587*uc_inertia}" />
     <xacro:property name="clamp2_ixy" value="${0.000019714*uc_inertia}" />
     <xacro:property name="clamp2_ixz" value="${-0.00001739*uc_inertia}" />
@@ -443,7 +443,7 @@
     <parent link="actuator1"/>
     <child link="clamp1"/>
     <origin rpy="${0} ${0} ${0}" xyz="${0} ${0} ${0.0235}"/>
-    <limit effort="30" velocity="1.0"/>
+    <limit effort="100" velocity="1.0"/>
   </joint>
 
 
@@ -463,7 +463,7 @@
   <xacro:property name="clamp1_cog_x" value="-0.000000709384" />
   <xacro:property name="clamp1_cog_y" value="0.003831382911" />
   <xacro:property name="clamp1_cog_z" value="0.007840028704" />
- <!-- Todo change units -->
+
   <xacro:property name="clamp1_ixx" value="${35.98639204*uc_inertia}" />
   <xacro:property name="clamp1_ixy" value="${-0.036707373*uc_inertia}" />
   <xacro:property name="clamp1_ixz" value="${-0.00032096*uc_inertia}" />
@@ -547,7 +547,7 @@
     <xacro:property name="tip_cog_x" value="0" />
     <xacro:property name="tip_cog_y" value="0" />
     <xacro:property name="tip_cog_z" value="0.000163952" />
-<!-- To Do change units -->
+
     <xacro:property name="tip_ixx" value="${0.031944763*uc_inertia}" />
     <xacro:property name="tip_ixy" value="${0*uc_inertia}" />
     <xacro:property name="tip_ixz" value="${0*uc_inertia}" />
