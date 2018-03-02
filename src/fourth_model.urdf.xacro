@@ -62,6 +62,8 @@
     <!-- Mesh files are in mm. All mesh files are scaled by the factor 1000-->
     <xacro:property name="mesh_scale" value="0.001" />
 
+    <!-- Unit conversion for inertia from kg*mm² to kg m² -->
+    <xacro:property name="uc_inertia" value="0.000001" />
 
     <!-- The Mass and inertia elements are defined before the link element-->
 
@@ -73,12 +75,12 @@
     <xacro:property name="baseplate_cog_z" value="0.01488134446" />
 
 <!-- To Do change units -->
-    <xacro:property name="baseplate_ixx" value="60.4589042" />
-    <xacro:property name="baseplate_ixy" value="-23.91373491" />
-    <xacro:property name="baseplate_ixz" value="-9.415308277" />
-    <xacro:property name="baseplate_iyy" value="32.25701807" />
-    <xacro:property name="baseplate_iyz" value="17.84460765" />
-    <xacro:property name="baseplate_izz" value="75.37700913" />
+    <xacro:property name="baseplate_ixx" value="${60.4589042*uc_inertia}" />
+    <xacro:property name="baseplate_ixy" value="${-23.91373491*uc_inertia}" />
+    <xacro:property name="baseplate_ixz" value="${-9.415308277*uc_inertia}" />
+    <xacro:property name="baseplate_iyy" value="${32.25701807*uc_inertia}" />
+    <xacro:property name="baseplate_iyz" value="${17.84460765*uc_inertia}" />
+    <xacro:property name="baseplate_izz" value="${75.37700913*uc_inertia}" />
 
 
   <link name="world"/>
@@ -181,12 +183,12 @@
   <xacro:property name="bearing_cog_y" value="0.00095854858" />
   <xacro:property name="bearing_cog_z" value="-0.01965454186" />
 
-  <xacro:property name="bearing_ixx" value="139.5553029" />
-  <xacro:property name="bearing_ixy" value="0.414376963" />
-  <xacro:property name="bearing_ixz" value="-31.92210758" />
-  <xacro:property name="bearing_iyy" value="162.416508" />
-  <xacro:property name="bearing_iyz" value="-0.344517543" />
-  <xacro:property name="bearing_izz" value="80.76641832" />
+  <xacro:property name="bearing_ixx" value="${139.5553029*uc_inertia}" />
+  <xacro:property name="bearing_ixy" value="${0.414376963*uc_inertia}" />
+  <xacro:property name="bearing_ixz" value="${-31.92210758*uc_inertia}" />
+  <xacro:property name="bearing_iyy" value="${162.416508*uc_inertia}" />
+  <xacro:property name="bearing_iyz" value="${-0.344517543*uc_inertia}" />
+  <xacro:property name="bearing_izz" value="${80.76641832*uc_inertia}" />
 
 
   <link name="dynamixel_to_hebi">
@@ -258,7 +260,6 @@
     <axis rpy="0 0 0" xyz="0 1 0"/>
     <parent link="actuator2"/>
     <child link="clamp2"/>
-    <!--<origin rpy="${pi/2} ${0} ${-pi/2+pi/6}" xyz="${0} ${0} ${0.016}"/>-->
     <origin rpy="${pi/2} ${0} ${-pi/2}" xyz="${0} ${0} ${0.01605}"/>
     <limit effort="30" velocity="1.0"/>
   </joint>
@@ -281,12 +282,12 @@
   <xacro:property name="clamp2_cog_y" value="0.008.118243555" />
   <xacro:property name="clamp2_cog_z" value="-0.01350332735" />
 <!-- To do change units-->
-  <xacro:property name="clamp2_ixx" value="21.61924342" />
-  <xacro:property name="clamp2_ixy" value="-0.000002107" />
-  <xacro:property name="clamp2_ixz" value="0.000000228" />
-  <xacro:property name="clamp2_iyy" value="23.46303475" />
-  <xacro:property name="clamp2_iyz" value="-4.826007788" />
-  <xacro:property name="clamp2_izz" value="7.990509672" />
+  <xacro:property name="clamp2_ixx" value="${21.61924342*uc_inertia}" />
+  <xacro:property name="clamp2_ixy" value="${-0.000002107*uc_inertia}" />
+  <xacro:property name="clamp2_ixz" value="${0.000000228*uc_inertia}" />
+  <xacro:property name="clamp2_iyy" value="${23.46303475*uc_inertia}" />
+  <xacro:property name="clamp2_iyz" value="${-4.826007788*uc_inertia}" />
+  <xacro:property name="clamp2_izz" value="${7.990509672*uc_inertia}" />
 
   <link name="clamp2">
     <visual>
@@ -354,7 +355,7 @@
 
 
 
-    <joint name="tube2_to_clamp2" type="fixed">
+    <joint name="tube2_to_adapter" type="fixed">
       <parent link="tube2"/>
       <child link="tube_adapter"/>
       <origin rpy="${pi/2} 0 ${-pi}" xyz="${0} ${-0.02} ${0.4-0.0056}"/>
@@ -366,12 +367,12 @@
     <xacro:property name="clamp2_cog_y" value="-5.987489264" />
     <xacro:property name="clamp2_cog_z" value="20" />
     <!-- To Do change units -->
-    <xacro:property name="clamp2_ixx" value="27.76777587" />
-    <xacro:property name="clamp2_ixy" value="0.000019714" />
-    <xacro:property name="clamp2_ixz" value="-0.00001739" />
-    <xacro:property name="clamp2_iyy" value="21.78807802" />
-    <xacro:property name="clamp2_iyz" value="-3.320450023" />
-    <xacro:property name="clamp2_izz" value="14.62444632" />
+    <xacro:property name="clamp2_ixx" value="${27.76777587*uc_inertia}" />
+    <xacro:property name="clamp2_ixy" value="${0.000019714*uc_inertia}" />
+    <xacro:property name="clamp2_ixz" value="${-0.00001739*uc_inertia}" />
+    <xacro:property name="clamp2_iyy" value="${21.78807802*uc_inertia}" />
+    <xacro:property name="clamp2_iyz" value="${-3.320450023*uc_inertia}" />
+    <xacro:property name="clamp2_izz" value="${14.62444632*uc_inertia}" />
 
     <link name="tube_adapter">
       <visual>
@@ -463,12 +464,12 @@
   <xacro:property name="clamp1_cog_y" value="0.003831382911" />
   <xacro:property name="clamp1_cog_z" value="0.007840028704" />
  <!-- Todo change units -->
-  <xacro:property name="clamp1_ixx" value="35.98639204" />
-  <xacro:property name="clamp1_ixy" value="-0.036707373" />
-  <xacro:property name="clamp1_ixz" value="-0.00032096" />
-  <xacro:property name="clamp1_iyy" value="26.23411723" />
-  <xacro:property name="clamp1_iyz" value="7.078559572" />
-  <xacro:property name="clamp1_izz" value="43.83528986" />
+  <xacro:property name="clamp1_ixx" value="${35.98639204*uc_inertia}" />
+  <xacro:property name="clamp1_ixy" value="${-0.036707373*uc_inertia}" />
+  <xacro:property name="clamp1_ixz" value="${-0.00032096*uc_inertia}" />
+  <xacro:property name="clamp1_iyy" value="${26.23411723*uc_inertia}" />
+  <xacro:property name="clamp1_iyz" value="${7.078559572*uc_inertia}" />
+  <xacro:property name="clamp1_izz" value="${43.83528986*uc_inertia}" />
 
 
   <link name="clamp1">
@@ -547,12 +548,12 @@
     <xacro:property name="tip_cog_y" value="0" />
     <xacro:property name="tip_cog_z" value="0.000163952" />
 <!-- To Do change units -->
-    <xacro:property name="tip_ixx" value="0.031944763" />
-    <xacro:property name="tip_ixy" value="0" />
-    <xacro:property name="tip_ixz" value="0" />
-    <xacro:property name="tip_iyy" value="0.031944763" />
-    <xacro:property name="tip_iyz" value="0" />
-    <xacro:property name="tip_izz" value="0.033720057" />
+    <xacro:property name="tip_ixx" value="${0.031944763*uc_inertia}" />
+    <xacro:property name="tip_ixy" value="${0*uc_inertia}" />
+    <xacro:property name="tip_ixz" value="${0*uc_inertia}" />
+    <xacro:property name="tip_iyy" value="${0.031944763*uc_inertia}" />
+    <xacro:property name="tip_iyz" value="${0*uc_inertia}" />
+    <xacro:property name="tip_izz" value="${0.033720057*uc_inertia}" />
 
     <link name="tip">
       <visual>
@@ -589,19 +590,19 @@
     <gazebo reference="actuator3">
       <selfCollide>true</selfCollide>
     </gazebo>
-    <gazebo reference="connectingbox">
+    <gazebo reference="dynamixel_to_hebi">
       <selfCollide>true</selfCollide>
     </gazebo>
     <gazebo reference="actuator2">
       <selfCollide>true</selfCollide>
     </gazebo>
-    <gazebo reference="clamp3">
+    <gazebo reference="clamp2">
       <selfCollide>true</selfCollide>
     </gazebo>
     <gazebo reference="tube2">
       <selfCollide>true</selfCollide>
     </gazebo>
-    <gazebo reference="clamp2">
+    <gazebo reference="tube_adapter">
       <selfCollide>true</selfCollide>
     </gazebo>
     <gazebo reference="actuator1">
