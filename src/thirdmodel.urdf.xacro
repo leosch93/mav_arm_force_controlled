@@ -150,7 +150,7 @@
   </link>
 
 
-  <joint name="actuator_to_connectingbox" type="continuous">
+  <joint name="actuator_to_connectingbox" type="revolute">
     <axis rpy="0 0 0" xyz="0 0 1"/>
     <parent link="actuator3"/>
     <child link="connectingbox"/>
@@ -209,7 +209,6 @@
 
 
 
-
   <joint name="connectingbox_to_actuator2" type="fixed">
     <parent link="connectingbox"/>
     <child link="actuator2"/>
@@ -252,7 +251,7 @@
   </link>
 
 
-  <joint name="actuator2_to_clamp3" type="continuous">
+  <joint name="actuator2_to_clamp3" type="revolute">
     <axis rpy="0 0 0" xyz="0 1 0"/>
     <parent link="actuator2"/>
     <child link="clamp3"/>
@@ -306,7 +305,6 @@
       <inertia ixx="${clamp3_ixx}" ixy="${clamp3_ixy}" ixz="${clamp3_ixz}" iyy="${clamp3_iyy}" iyz="${clamp3_iyz}" izz="${clamp3_izz}" />
     </inertial>
   </link>
-
 
   <joint name="clamp3_to_tube2" type="fixed">
     <parent link="clamp3"/>
@@ -433,7 +431,7 @@
       </inertial>
     </link>
 
-  <joint name="actuator1_to_clamp1" type="continuous">
+  <joint name="actuator1_to_clamp1" type="revolute">
     <axis rpy="0 0 0" xyz="0 0 1"/>
     <parent link="actuator1"/>
     <child link="clamp1"/>
@@ -593,6 +591,7 @@
     <gazebo reference="clamp3">
       <selfCollide>true</selfCollide>
     </gazebo>
+
     <gazebo reference="tube2">
       <selfCollide>true</selfCollide>
     </gazebo>

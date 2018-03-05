@@ -157,13 +157,17 @@
     </inertial>
   </link>
 
-  <joint name="actuator_to_hebi" type="continuous">
-    <axis xyz="0 0 ${1}"/>
+
+
+
+  <joint name="actuator_to_hebi" type="revolute">
+    <axis rpy="0 0 0" xyz="0 0 1"/>
     <parent link="actuator3"/>
     <child link="dynamixel_to_hebi"/>
-    <origin rpy="0 0 0" xyz="0 0 ${0.0235+0.012}"/>
+    <origin rpy="0 0 ${0}" xyz="0 0 ${0.0235+0.012}"/>
     <limit effort="30" velocity="1.0"/>
   </joint>
+
 
   <transmission name="actuator3_dynamixel_trans">
     <type>transmission_interface/SimpleTransmission</type>
@@ -174,8 +178,6 @@
       <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
     </joint>
   </transmission>
-
-
 
   <xacro:property name="bearing_mass" value="0.123" />
 
@@ -214,7 +216,7 @@
   </link>
 
 
-  <joint name="connectingbox_to_actuator2" type="fixed">
+  <joint name="bearing_to_actuator2" type="fixed">
     <parent link="dynamixel_to_hebi"/>
     <child link="actuator2"/>
     <origin rpy="${pi/2} ${0} ${pi/2}"  xyz="${0.038+0.015} ${0} ${-0.029}"/>
@@ -256,12 +258,12 @@
   </link>
 
 
-  <joint name="actuator2_to_clamp2" type="continuous">
+  <joint name="actuator2_to_clamp2" type="revolute">
     <axis rpy="0 0 0" xyz="0 1 0"/>
     <parent link="actuator2"/>
     <child link="clamp2"/>
-    <origin rpy="${pi/2} ${0} ${-pi/2}" xyz="${0} ${0} ${0.01605}"/>
-    <limit effort="100" velocity="1.0"/>
+    <origin rpy="${pi/2} ${0} ${0}" xyz="${0} ${0} ${0.01605}"/>
+    <limit effort="30" velocity="1.0"/>
   </joint>
 
 
@@ -361,18 +363,18 @@
       <origin rpy="${pi/2} 0 ${-pi}" xyz="${0} ${-0.02} ${0.4-0.0056}"/>
     </joint>
 
-    <xacro:property name="clamp2_mass" value="0.027727776" />
+    <xacro:property name="clamp2_mass" value="0.02919169" />
 
     <xacro:property name="clamp2_cog_x" value="-0.000051031" />
     <xacro:property name="clamp2_cog_y" value="-5.987489264" />
     <xacro:property name="clamp2_cog_z" value="20" />
 
-    <xacro:property name="clamp2_ixx" value="${27.76777587*uc_inertia}" />
-    <xacro:property name="clamp2_ixy" value="${0.000019714*uc_inertia}" />
-    <xacro:property name="clamp2_ixz" value="${-0.00001739*uc_inertia}" />
-    <xacro:property name="clamp2_iyy" value="${21.78807802*uc_inertia}" />
-    <xacro:property name="clamp2_iyz" value="${-3.320450023*uc_inertia}" />
-    <xacro:property name="clamp2_izz" value="${14.62444632*uc_inertia}" />
+    <xacro:property name="clamp2_ixx" value="${21.61924342*uc_inertia}" />
+    <xacro:property name="clamp2_ixy" value="${-0.000002107*uc_inertia}" />
+    <xacro:property name="clamp2_ixz" value="${0.000000228*uc_inertia}" />
+    <xacro:property name="clamp2_iyy" value="${23.46303475*uc_inertia}" />
+    <xacro:property name="clamp2_iyz" value="${-4.826007788*uc_inertia}" />
+    <xacro:property name="clamp2_izz" value="${7.990509672*uc_inertia}" />
 
     <link name="tube_adapter">
       <visual>
@@ -438,12 +440,14 @@
       </inertial>
     </link>
 
-  <joint name="actuator1_to_clamp1" type="continuous">
+
+
+  <joint name="actuator1_to_clamp1" type="revolute">
     <axis rpy="0 0 0" xyz="0 0 1"/>
     <parent link="actuator1"/>
     <child link="clamp1"/>
     <origin rpy="${0} ${0} ${0}" xyz="${0} ${0} ${0.0235}"/>
-    <limit effort="100" velocity="1.0"/>
+    <limit effort="30" velocity="1.0"/>
   </joint>
 
 
@@ -577,7 +581,7 @@
       </inertial>
     </link>
 
-
+revolute
     <gazebo>
       <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
         <robotNamespace>/arm</robotNamespace>

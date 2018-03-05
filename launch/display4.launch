@@ -1,7 +1,7 @@
 <launch>
   <!-- these are the arguments you can pass this launch file, for example paused:=true -->
 
-  <arg name="model" default="$(find mav_arm_force_controlled)/src/thirdmodel.urdf.xacro"/>
+  <arg name="model" default="$(find mav_arm_force_controlled)/src/fourth_model.urdf.xacro"/>
   <arg name="rvizconfig" default="$(find mav_arm_force_controlled)/rviz/urdf.rviz" />
   <arg name="paused" default="false"/>
   <arg name="use_sim_time" default="true"/>
@@ -30,7 +30,7 @@
 
 
   <!-- Load joint controller configurations from YAML file to parameter server-->
-  <rosparam file="$(find mav_arm_force_controlled)/config/arm_control.yaml" command="load"/>
+  <rosparam file="$(find mav_arm_force_controlled)/config/arm_control_4.yaml" command="load"/>
 
   <!-- load the controllers-->
   <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
@@ -46,9 +46,9 @@
   </node>
 
 
-<!-- do not use rviz and gazebo simultaneously!!!!!
+  <!-- do not use rviz and gazebo simultaneously!!!!!
   <node name="rviz" pkg="rviz" type="rviz" args="-d $(arg rvizconfig)" />
--->
+  -->
 
 
 </launch>
