@@ -25,7 +25,7 @@
 
 
     <!-- General Variables-->
-    <xacro:property name="pi" value="3.1415269" />
+    <xacro:property name="pi" value="3.1415926535897931" />
 
     <!-- Mesh files of exact geometry-->
     <xacro:property name="mesh_file_baseplate" value="package://mav_arm_force_controlled/meshes/geometry_2.0/voliro_arm_base_dynamixel_balanced.stl" />
@@ -145,7 +145,7 @@
         <material name="black"/>
     </visual>
     <collision>
-      <geometry>
+      <geometry>s
         <mesh filename="${s_mesh_file_dyamixel}"
               scale="${mesh_scale} ${mesh_scale} ${mesh_scale}"/>
         </geometry>
@@ -164,19 +164,21 @@
     <axis rpy="0 0 0" xyz="0 0 1"/>
     <parent link="actuator3"/>
     <child link="dynamixel_to_hebi"/>
-    <origin rpy="0 0 ${0}" xyz="0 0 ${0.0235+0.012}"/>
-    <limit effort="30" velocity="1.0"/>
+    <origin rpy="0 0 ${pi/2}" xyz="0 0 ${0.0235+0.012}"/>
+    <!--<limit effort="100" velocity="10"/>-->
+    <limit effort="100" lower="${-pi/2}" upper="${pi/2}" velocity="10" />
   </joint>
 
 
   <transmission name="actuator3_dynamixel_trans">
     <type>transmission_interface/SimpleTransmission</type>
-    <actuator name="actuator3_dynamixel_motor">
-      <mechanicalReduction>1</mechanicalReduction>
-    </actuator>
     <joint name="actuator_to_hebi">
       <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
     </joint>
+    <actuator name="actuator3_dynamixel_motor">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
   </transmission>
 
   <xacro:property name="bearing_mass" value="0.123" />
@@ -214,6 +216,7 @@
       <inertia ixx="${bearing_ixx}" ixy="${bearing_ixy}" ixz="${bearing_ixz}" iyy="${bearing_iyy}" iyz="${bearing_iyz}" izz="${bearing_izz}" />
     </inertial>
   </link>
+
 
 
   <joint name="bearing_to_actuator2" type="fixed">
@@ -258,12 +261,13 @@
   </link>
 
 
-  <joint name="actuator2_to_clamp2" type="revolute">
-    <axis rpy="0 0 0" xyz="0 1 0"/>
+  <joint name="actuator2_to_clamp2" type="continuous">
+    <axis rpy="0 0 0" xyz="0 -1 0"/>
     <parent link="actuator2"/>
     <child link="clamp2"/>
     <origin rpy="${pi/2} ${0} ${0}" xyz="${0} ${0} ${0.01605}"/>
-    <limit effort="30" velocity="1.0"/>
+    <limit effort="100" velocity="10" />
+    <!--<limit effort="100" lower="${-2*pi}" upper="${2*pi}" velocity="10" />-->
   </joint>
 
 
@@ -441,26 +445,28 @@
     </link>
 
 
-
-  <joint name="actuator1_to_clamp1" type="revolute">
+  <joint name="actuator1_to_clamp1" type="continuous">
     <axis rpy="0 0 0" xyz="0 0 1"/>
     <parent link="actuator1"/>
     <child link="clamp1"/>
     <origin rpy="${0} ${0} ${0}" xyz="${0} ${0} ${0.0235}"/>
-    <limit effort="30" velocity="1.0"/>
+    <limit effort="100" velocity="10" />
+    <!--<limit effort="100" lower="${-2*pi}" upper="${2*pi}" velocity="10" />-->
   </joint>
-
-
 
   <transmission name="actuator1_dynamixel_trans">
     <type>transmission_interface/SimpleTransmission</type>
-    <actuator name="$actuator1_dynamixel_motor">
-      <mechanicalReduction>1</mechanicalReduction>
-    </actuator>
     <joint name="actuator1_to_clamp1">
       <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
     </joint>
+    <actuator name="actuator1_dynamixel">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
   </transmission>
+
+
+
 
   <xacro:property name="clamp1_mass" value="0.084238767" />
 
@@ -497,7 +503,6 @@
       <inertia ixx="${clamp1_ixx}" ixy="${clamp1_ixy}" ixz="${clamp1_ixz}" iyy="${clamp1_iyy}" iyz="${clamp1_iyz}" izz="${clamp1_izz}" />
     </inertial>
   </link>
-
 
   <joint name="clamp1_to_tube1" type="fixed">
     <parent link="clamp1"/>
@@ -581,12 +586,14 @@
       </inertial>
     </link>
 
-revolute
+
     <gazebo>
       <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
         <robotNamespace>/arm</robotNamespace>
+        <robotSimType>gazebo_ros_control/DefaultRobotHWSim</robotSimType>
       </plugin>
     </gazebo>
+
 
     <gazebo reference="baseplate">
       <selfCollide>true</selfCollide>
@@ -621,8 +628,5 @@ revolute
     <gazebo reference="tip">
       <selfCollide>true</selfCollide>
     </gazebo>
-
-
-        <!--<robotSimType>gazebo_ros_control/DefaultRobotHWSim</robotSimType>-->
 
 </robot>
