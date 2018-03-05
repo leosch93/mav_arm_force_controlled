@@ -8,12 +8,12 @@ arm:
   joint1_position_controller:
     type: effort_controllers/JointPositionController
     joint: actuator1_to_clamp1
-    pid: {p: 100.0, i: 0.01, d: 0.1}
+    pid: {p: 100.0, i: 0.01, d: 1}
   joint2_position_controller:
     type: effort_controllers/JointPositionController
     joint: actuator2_to_clamp2
-    pid: {p: 100.0, i: 0.01, d: 0.1}
+    pid: {p: 100.0, i: 0.01, d: 1}
   joint3_position_controller:
     type: effort_controllers/JointPositionController
     joint: actuator_to_hebi
-    pid: {p: 100.0, i: 0.01, d: 0.1}
+    pid: {p: 100.0, i: 0.01, d: 1}
