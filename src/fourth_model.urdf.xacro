@@ -166,7 +166,7 @@
     <child link="dynamixel_to_hebi"/>
     <origin rpy="0 0 ${pi/2}" xyz="0 0 ${0.0235+0.012}"/>
     <!--<limit effort="100" velocity="10"/>-->
-    <limit effort="100" lower="${-pi/2}" upper="${pi/2}" velocity="10" />
+    <limit effort="5" lower="${-pi/2}" upper="${pi/2}" velocity="1" />
   </joint>
 
 
@@ -266,7 +266,7 @@
     <parent link="actuator2"/>
     <child link="clamp2"/>
     <origin rpy="${pi/2} ${0} ${0}" xyz="${0} ${0} ${0.01605}"/>
-    <limit effort="100" velocity="10" />
+    <limit effort="5" velocity="1" />
     <!--<limit effort="100" lower="${-2*pi}" upper="${2*pi}" velocity="10" />-->
   </joint>
 
@@ -450,7 +450,7 @@
     <parent link="actuator1"/>
     <child link="clamp1"/>
     <origin rpy="${0} ${0} ${0}" xyz="${0} ${0} ${0.0235}"/>
-    <limit effort="100" velocity="10" />
+    <limit effort="5" velocity="1" />
     <!--<limit effort="100" lower="${-2*pi}" upper="${2*pi}" velocity="10" />-->
   </joint>
 
@@ -510,18 +510,18 @@
     <origin rpy="${0} ${pi/2} ${pi/2}" xyz="${0} ${0.016} ${0.022}"/>
   </joint>
 
-  <xacro:property name="tube1_mass" value="0.02035752" />
+  <xacro:property name="tube1_mass" value="0.039207076" />
 
   <xacro:property name="tube1_cog_x" value="0" />
   <xacro:property name="tube1_cog_y" value="0" />
   <xacro:property name="tube1_cog_z" value="0.3" />
 
-  <xacro:property name="tube1_ixx" value="0.002443367" />
+  <xacro:property name="tube1_ixx" value="${uc_inertia*4705.682308}" />
   <xacro:property name="tube1_ixy" value="0" />
   <xacro:property name="tube1_ixz" value="0" />
-  <xacro:property name="tube1_iyy" value="0.002443367" />
+  <xacro:property name="tube1_iyy" value="${uc_inertia*4705.682308}" />
   <xacro:property name="tube1_iyz" value="0" />
-  <xacro:property name="tube1_izz" value="0.000000929" />
+  <xacro:property name="tube1_izz" value="${uc_inertia*1.666300743}" />
 
     <link name="tube1">
       <visual>
@@ -551,18 +551,18 @@
       <origin rpy="${0} ${0} ${0}" xyz="${0} ${0} ${0.6}"/>
     </joint>
 
-    <xacro:property name="tip_mass" value="0.001658447" />
+    <xacro:property name="tip_mass" value="0.001540637" />
 
     <xacro:property name="tip_cog_x" value="0" />
     <xacro:property name="tip_cog_y" value="0" />
-    <xacro:property name="tip_cog_z" value="0.000163952" />
+    <xacro:property name="tip_cog_z" value="0.000367659054" />
 
-    <xacro:property name="tip_ixx" value="${0.031944763*uc_inertia}" />
+    <xacro:property name="tip_ixx" value="${0.028658362*uc_inertia}" />
     <xacro:property name="tip_ixy" value="${0*uc_inertia}" />
     <xacro:property name="tip_ixz" value="${0*uc_inertia}" />
-    <xacro:property name="tip_iyy" value="${0.031944763*uc_inertia}" />
+    <xacro:property name="tip_iyy" value="${0.028658362*uc_inertia}" />
     <xacro:property name="tip_iyz" value="${0*uc_inertia}" />
-    <xacro:property name="tip_izz" value="${0.033720057*uc_inertia}" />
+    <xacro:property name="tip_izz" value="${0.029110752*uc_inertia}" />
 
     <link name="tip">
       <visual>
