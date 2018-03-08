@@ -21,10 +21,25 @@
     <selfCollide>true</selfCollide>
     <material>Gazebo/Grey</material>
   </gazebo>
+
   <gazebo reference="actuator2">
     <selfCollide>true</selfCollide>
     <material>Gazebo/Red</material>
   </gazebo>
+
+
+    <!-- <gazebo reference="actuator2">
+      <selfCollide>true</selfCollide>
+      <visual>
+      <material>
+          <ambient>0.19225 0.19225 0.19225 1.0</ambient>
+          <diffuse>0.50754 0.50754 0.50754 1.0</diffuse>
+          <specular>0.508273 0.508273 0.508273 1.0</specular>
+          <emissive>0.0 0.0 0.0 0.0</emissive>
+        </material>
+      <visual/>
+    </gazebo> -->
+
   <gazebo reference="clamp2">
     <selfCollide>true</selfCollide>
     <material>Gazebo/Grey</material>
