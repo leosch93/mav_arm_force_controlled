@@ -1,28 +1,13 @@
 <?xml version="1.0"?>
 <robot name="arm" xmlns:xacro="http://ros.org/wiki/xacro">
 
-    <!--<selfCollide>true</selfCollide>-->
 
-  <!-- Material and Colors-->
-  <material name="black">
-    <color rgba="${0/255} ${0/255} ${0/255} 1"/>
-  </material>
-  <material name="dark_grey">
-    <color rgba="${105/255} ${105/255} ${105/255} 1"/>
-  </material>
-  <material name="grey">
-    <color rgba="${128/255} ${128/255} ${128/255} 1"/>
-  </material>
-  <material name="light_grey">
-    <color rgba="${221/255} ${221/255} ${221/255} 1"/>
-  </material>
-  <material name="white">
-    <color rgba="${255/255} ${255/255} ${255/255} 1"/>
-  </material>
-  <material name="red">
-    <color rgba="${255/255} ${0/255} ${0/255} 1"/>
-  </material>
 
+    <!-- Import all Gazebo-customization elements, including Gazebo colors -->
+    <xacro:include filename="$(find mav_arm_force_controlled)/src/arm_gazebo_materials.gazebo" />
+
+    <!-- Import Rviz colors -->
+    <xacro:include filename="$(find mav_arm_force_controlled)/src/arm_rviz_materials.xacro" />
 
     <!-- General Variables-->
     <xacro:property name="pi" value="3.1415926535897931" />
@@ -62,18 +47,15 @@
     <!-- Mesh files are in mm. All mesh files are scaled by the factor 1000-->
     <xacro:property name="mesh_scale" value="0.001" />
 
-    <!-- Unit conversion for inertia from kg*mm² to kg m² -->
+    <!-- Unit conversion for inertia from kg*mm² to kg*m² -->
     <xacro:property name="uc_inertia" value="0.000001" />
 
-    <!-- The Mass and inertia elements are defined before the link element-->
-
+    <!-- The mass and inertia elements are defined before the link element -->
     <xacro:property name="baseplate_mass" value="0.034534697" />
-
 
     <xacro:property name="baseplate_cog_x" value="-0.0155840153" />
     <xacro:property name="baseplate_cog_y" value="0.03245573125" />
     <xacro:property name="baseplate_cog_z" value="0.01488134446" />
-
 
     <xacro:property name="baseplate_ixx" value="${60.4589042*uc_inertia}" />
     <xacro:property name="baseplate_ixy" value="${-23.91373491*uc_inertia}" />
@@ -98,7 +80,6 @@
                 scale="${mesh_scale} ${mesh_scale} ${mesh_scale}"/>
         </geometry>
       <origin rpy="0 0 0" xyz="0 0 0"/>
-       <material name="black"/>
     </visual>
     <collision>
       <geometry>
@@ -112,6 +93,8 @@
       <inertia ixx="${baseplate_ixx}" ixy="${baseplate_ixy}" ixz="${baseplate_ixz}" iyy="${baseplate_iyy}" iyz="${baseplate_iyz}" izz="${baseplate_izz}" />
     </inertial>
   </link>
+
+
 
   <joint name="baseplate_to_actuator3" type="fixed">
     <parent link="baseplate"/>
@@ -219,6 +202,7 @@
 
 
 
+
   <joint name="bearing_to_actuator2" type="fixed">
     <parent link="dynamixel_to_hebi"/>
     <child link="actuator2"/>
@@ -317,6 +301,8 @@
     </inertial>
   </link>
 
+
+
   <joint name="clamp2_to_tube2" type="fixed">
     <parent link="clamp2"/>
     <child link="tube2"/>
@@ -357,7 +343,6 @@
       <inertia ixx="${tube2_ixx}" ixy="${tube2_ixy}" ixz="${tube2_ixz}" iyy="${tube2_iyy}" iyz="${tube2_iyz}" izz="${tube2_izz}" />
     </inertial>
   </link>
-
 
 
 
@@ -403,6 +388,7 @@
     </link>
 
 
+
       <joint name="clamp2_to_actuator1" type="fixed">
         <parent link="tube_adapter"/>
         <child link="actuator1"/>
@@ -443,6 +429,7 @@
         <inertia ixx="${actuator1_ixx}" ixy="${actuator1_ixy}" ixz="${actuator1_ixz}" iyy="${actuator1_iyy}" iyz="${actuator1_iyz}" izz="${actuator1_izz}" />
       </inertial>
     </link>
+
 
 
   <joint name="actuator1_to_clamp1" type="continuous">
@@ -504,6 +491,9 @@
     </inertial>
   </link>
 
+
+
+
   <joint name="clamp1_to_tube1" type="fixed">
     <parent link="clamp1"/>
     <child link="tube1"/>
@@ -530,7 +520,6 @@
             scale="${mesh_scale} ${mesh_scale} ${mesh_scale}"/>
         </geometry>
         <origin rpy="0 0 0" xyz="0 0 0"/>
-        <material name="black"/>
       </visual>
       <collision>
         <geometry>
@@ -544,6 +533,9 @@
         <inertia ixx="${tube1_ixx}" ixy="${tube1_ixy}" ixz="${tube1_ixz}" iyy="${tube1_iyy}" iyz="${tube1_iyz}" izz="${tube1_izz}" />
       </inertial>
     </link>
+
+
+
 
     <joint name="tube1_to_tip" type="fixed">
       <parent link="tube1"/>
@@ -571,7 +563,6 @@
             scale="${mesh_scale} ${mesh_scale} ${mesh_scale}"/>
         </geometry>
         <origin rpy="0 0 0" xyz="0 0 0"/>
-        <material name="white"/>
       </visual>
       <collision>
         <geometry>
@@ -587,46 +578,6 @@
     </link>
 
 
-    <gazebo>
-      <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
-        <robotNamespace>/arm</robotNamespace>
-        <robotSimType>gazebo_ros_control/DefaultRobotHWSim</robotSimType>
-      </plugin>
-    </gazebo>
 
-
-    <gazebo reference="baseplate">
-      <selfCollide>true</selfCollide>
-    </gazebo>
-    <gazebo reference="actuator3">
-      <selfCollide>true</selfCollide>
-    </gazebo>
-    <gazebo reference="dynamixel_to_hebi">
-      <selfCollide>true</selfCollide>
-    </gazebo>
-    <gazebo reference="actuator2">
-      <selfCollide>true</selfCollide>
-    </gazebo>
-    <gazebo reference="clamp2">
-      <selfCollide>true</selfCollide>
-    </gazebo>
-    <gazebo reference="tube2">
-      <selfCollide>true</selfCollide>
-    </gazebo>
-    <gazebo reference="tube_adapter">
-      <selfCollide>true</selfCollide>
-    </gazebo>
-    <gazebo reference="actuator1">
-      <selfCollide>true</selfCollide>
-    </gazebo>
-    <gazebo reference="clamp1">
-      <selfCollide>true</selfCollide>
-    </gazebo>
-    <gazebo reference="tube1">
-      <selfCollide>true</selfCollide>
-    </gazebo>
-    <gazebo reference="tip">
-      <selfCollide>true</selfCollide>
-    </gazebo>
 
 </robot>
