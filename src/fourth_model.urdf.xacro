@@ -436,7 +436,7 @@
     <axis rpy="0 0 0" xyz="0 0 1"/>
     <parent link="actuator1"/>
     <child link="clamp1"/>
-    <origin rpy="${0} ${0} ${pi/4}" xyz="${0} ${0} ${0.0235}"/>
+    <origin rpy="${0} ${0} ${-pi/4}" xyz="${0} ${0} ${0.0235}"/>
     <limit effort="5" velocity="1" />
     <!--<limit effort="100" lower="${-2*pi}" upper="${2*pi}" velocity="10" />-->
   </joint>
